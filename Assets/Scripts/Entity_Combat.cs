@@ -4,6 +4,8 @@ using UnityEngine;
 public class Entity_Combat : MonoBehaviour
 {
 
+    public float damage = 10;
+
     [Header("Target Detection")]
     [SerializeField] private float targetCheckRadius = 1;
     [SerializeField] private Transform targetCheckPoint;
@@ -13,7 +15,7 @@ public class Entity_Combat : MonoBehaviour
     {
         foreach (var target in GetDetectedColliders())
         {
-            Debug.Log(target.name);
+            target.GetComponent<Entity_Health>()?.TakeDamage(damage);
         }
     }
 
