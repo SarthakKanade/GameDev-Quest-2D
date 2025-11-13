@@ -15,8 +15,10 @@ public class Enemy_BattleState : EnemyState
         base.Enter();
 
         if (player == null)
-            player = enemy.PlayerDetected().transform;
-
+        {
+            player = enemy.GetPlayerReference();
+        }
+        
         if (ShouldRetreat())
         {
             rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * -DirectionToPlayer(), enemy.retreatVelocity.y);
@@ -29,10 +31,14 @@ public class Enemy_BattleState : EnemyState
         base.Update();
 
         if (enemy.PlayerDetected())
+        {
             UpdateBattleTimer();
+        }
 
         if (BattleTimeIsOver())
+        {
             stateMachine.ChangeState(enemy.idleState);
+        }
 
         if (WithinAttackRange() && enemy.PlayerDetected())
             stateMachine.ChangeState(enemy.attackState);
