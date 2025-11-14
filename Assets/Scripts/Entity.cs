@@ -20,6 +20,11 @@ public class Entity : MonoBehaviour
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
 
+    // Status Vribales
+    private bool isKnockbacked;
+    private Coroutine knockbackCo;
+
+
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -47,6 +52,10 @@ public class Entity : MonoBehaviour
 
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        if(isKnockbacked)
+        
+            return;
+
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
     }
