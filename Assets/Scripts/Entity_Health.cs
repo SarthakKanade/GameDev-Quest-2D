@@ -4,13 +4,27 @@ using UnityEngine;
 public class Entity_Health : MonoBehaviour
 {
     private Enity_VFX entityVFX;
+    private Entity entity;
 
+    [SerializeField] protected float currentHP;
     [SerializeField] protected float maxHP = 100;
     [SerializeField] protected bool isDead;
+
+    [Header("On Damage Knockback")] 
+    [SerializeField] protected Vector2 knockbackForce = new Vector2(1.5f, 2.5f);
+    [SerializeField] protected Vector2 heavyKnockbackForce = new Vector2(7.0f, 7.0f);
+    [SerializeField] protected float knockbackDuration = 0.2f;
+    [SerializeField] protected float heavyKnockbackDuration = 0.5f;
+    
+    [Header("On Heavy Damage")]
+    [SerializeField] private float heavyDamageThreshold = 0.3f;
 
     protected virtual void Awake()
     {
         entityVFX = GetComponent<Enity_VFX>();
+        entity = GetComponent<Entity>();
+
+        currentHP = maxHP;
     }
 
     public virtual void TakeDamage(float damage, Transform damageDealer)
@@ -20,16 +34,19 @@ public class Entity_Health : MonoBehaviour
             return;
         }
 
+        Vector2 knockback = CalculateKnockback(damage,damageDealer.position);
+        float duration = CalculateDuration(damage);
+
+        entity?.ReceiveKnockback(knockback, duration);
         entityVFX?.PlayOnDamageVFX();
-        
         ReduceHP(damage);
     }
 
     private void ReduceHP(float damage)
     {
-        maxHP -= damage;
+        currentHP -= damage;
 
-        if (maxHP <= 0)
+        if (currentHP <= 0)
         {
             Die();
         }
@@ -39,5 +56,47 @@ public class Entity_Health : MonoBehaviour
     {
         isDead = true;
         Debug.Log("DEAD");
+    }
+
+    private Vector2 CalculateKnockback(float damage, Vector2 damageDealerPosition)
+    {
+        int direction = 1;
+        Vector2 knockback;
+        if (transform.position.x > damageDealerPosition.x)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = -1;
+        }
+
+        if (IsHeavyDamage(damage))
+        {
+            knockback = heavyKnockbackForce;
+        }
+        else
+        {
+            knockback = knockbackForce;
+        }
+
+        knockback.x *= direction;
+
+        return knockback;
+    }
+
+    private float CalculateDuration(float damage)
+    {
+        return IsHeavyDamage(damage) ? heavyKnockbackDuration : knockbackDuration;
+    }
+
+    private bool IsHeavyDamage(float damage)
+    {
+        if(damage/maxHP > heavyDamageThreshold)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

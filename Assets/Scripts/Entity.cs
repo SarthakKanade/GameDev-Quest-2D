@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
@@ -36,7 +37,6 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
-
     }
 
     protected virtual void Update()
@@ -50,11 +50,31 @@ public class Entity : MonoBehaviour
         stateMachine.currentState.AnimationTrigger();
     }
 
+    public void ReceiveKnockback(Vector2 knockbackDirection, float knockbackDuration)
+    {
+        if(knockbackCo != null)
+            StopCoroutine(knockbackCo);
+
+        knockbackCo = StartCoroutine(KnockbackCo(knockbackDirection, knockbackDuration));
+    }
+
+    private IEnumerator KnockbackCo(Vector2 knockbackDirection, float knockbackDuration)
+    {
+        isKnockbacked = true;
+        rb.linearVelocity = knockbackDirection;
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnockbacked = false;
+        
+    }
+
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         if(isKnockbacked)
-        
+        {
             return;
+        }
 
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
