@@ -1,9 +1,9 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class Entity_Health : MonoBehaviour
+public class Entity_Health : MonoBehaviour, IDamagable
 {
-    private Enity_VFX entityVFX;
+    private Entity_VFX entityVFX;
     private Entity entity;
 
     [SerializeField] protected float currentHP;
@@ -21,7 +21,7 @@ public class Entity_Health : MonoBehaviour
 
     protected virtual void Awake()
     {
-        entityVFX = GetComponent<Enity_VFX>();
+        entityVFX = GetComponent<Entity_VFX>();
         entity = GetComponent<Entity>();
 
         currentHP = maxHP;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Enity_VFX : MonoBehaviour
+public class Entity_VFX : MonoBehaviour
 {
     private SpriteRenderer sr;
 
@@ -13,7 +13,6 @@ public class Enity_VFX : MonoBehaviour
 
     [Header("Knockback VFX")]
     [SerializeField] private Vector2 knockbackPower;
-    [SerializeField] private float knockbackDuration = .15f;
     private Coroutine knockbackVFXCo;
 
     protected void Awake()
