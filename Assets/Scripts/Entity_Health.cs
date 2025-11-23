@@ -29,10 +29,6 @@ public class Entity_Health : MonoBehaviour
 
     public virtual void TakeDamage(float damage, Transform damageDealer)
     {
-        if (isDead)
-        {
-            return;
-        }
 
         Vector2 knockback = CalculateKnockback(damage,damageDealer.position);
         float duration = CalculateDuration(damage);

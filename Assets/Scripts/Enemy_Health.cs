@@ -11,10 +11,11 @@ public class Enemy_Health : Entity_Health
         {
             return;
         }
-        
+
         if (damageDealer.GetComponent<Player>() != null)
         {
             enemy.TryEnterBattleState(damageDealer);
-        } 
+        }
+        
     }
 }

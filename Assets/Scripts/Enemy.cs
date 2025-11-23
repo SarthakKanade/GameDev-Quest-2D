@@ -35,14 +35,9 @@ public class Enemy : Entity
         stateMachine.ChangeState(deadState);
     }
 
-    public void TryEnterBattleState(Transform player)
+    private void handlePlayerDeath()
     {
-        if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
-        {
-            return;
-        }
-        this.player = player;
-        stateMachine.ChangeState(battleState);
+        stateMachine.ChangeState(idleState);
     }
 
     public Transform GetPlayerReference()
@@ -65,6 +60,17 @@ public class Enemy : Entity
         return hit;
     }
 
+    public void TryEnterBattleState(Transform player)
+    {
+        if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
+        {
+            return;
+        }
+        
+        this.player = player;
+        stateMachine.ChangeState(battleState);
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -76,6 +82,21 @@ public class Enemy : Entity
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDirection * minRetreatDistance), playerCheck.position.y));
 
+    }
+
+    private void OnEnable()
+    {
+        Player.OnPlayerDeath += handlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDeath -= handlePlayerDeath;
+    }
+
+    private void Die()
+    {
+        EntityDeath();
     }
 
 }

@@ -15,6 +15,11 @@ public class StateMachine
 
     public void ChangeState(EntityState newState)
     {
+        if (canChangeState == false)
+        {
+            return;
+        }
+
         currentState.Exit();
         currentState = newState;
         currentState.Enter();
