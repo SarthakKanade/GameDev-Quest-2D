@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerInputSet",
     "maps": [
         {
@@ -36,6 +37,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "ae3a11b2-30ce-4e93-bad4-46599b84cf93",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CounterAttack",
+                    "type": "Button",
+                    "id": "d4dace57-c0ce-4c92-be44-aeece903cefb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -124,10 +134,21 @@
                     "name": "",
                     "id": "abc544b3-c049-41a3-8fba-9fe82bf43e0f",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press,Press",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f404ff12-e47c-48dc-bf3d-701e3154b855",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "CounterAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
