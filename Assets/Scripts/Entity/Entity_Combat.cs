@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Entity_Combat : MonoBehaviour
 {
-
+    private Entity_VFX vfx;
     public float damage = 10;
 
     [Header("Target Detection")]
@@ -11,12 +11,23 @@ public class Entity_Combat : MonoBehaviour
     [SerializeField] private Transform targetCheckPoint;
     [SerializeField] private LayerMask whatIsTarget;
 
+    private void Awake()
+    {
+        vfx = GetComponent<Entity_VFX>();
+    }
+
     public void PerformAttack()
     {
         foreach (var target in GetDetectedColliders())
         {
             IDamagable damagable = target.GetComponent<IDamagable>();
+
+            if (damagable == null)
+            {
+                continue;
+            }
             damagable?.TakeDamage(damage, transform);
+            vfx.CreateOnHitVFX(target.transform);
         }
     }
 

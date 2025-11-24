@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity_VFX
   onDamageVFXMaterial: {fileID: 2100000, guid: d2cf925a8bbae47feaca9ddcd45af533, type: 2}
-  onDamageVFXDuration: 0.15
+  onDamageVFXDuration: 0.2
   knockbackPower: {x: 0, y: 0}
 --- !u!114 &274070550
 MonoBehaviour:
