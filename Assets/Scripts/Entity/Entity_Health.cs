@@ -1,8 +1,10 @@
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Entity_Health : MonoBehaviour, IDamagable
 {
+    private Slider healthBar;
     private Entity_VFX entityVFX;
     private Entity entity;
 
@@ -23,14 +25,24 @@ public class Entity_Health : MonoBehaviour, IDamagable
     {
         entityVFX = GetComponent<Entity_VFX>();
         entity = GetComponent<Entity>();
+        healthBar = GetComponentInChildren<Slider>();
 
         currentHP = maxHP;
+        UpdateHealthBar();
+    }
+    
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHP / maxHP;
+        }
     }
 
     public virtual void TakeDamage(float damage, Transform damageDealer)
     {
 
-        Vector2 knockback = CalculateKnockback(damage,damageDealer.position);
+        Vector2 knockback = CalculateKnockback(damage, damageDealer.position);
         float duration = CalculateDuration(damage);
 
         entity?.ReceiveKnockback(knockback, duration);
@@ -41,6 +53,7 @@ public class Entity_Health : MonoBehaviour, IDamagable
     private void ReduceHP(float damage)
     {
         currentHP -= damage;
+        UpdateHealthBar();
 
         if (currentHP <= 0)
         {

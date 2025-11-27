@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083732478798802199}
-  - component: {fileID: 848529710210319982}
+  - component: {fileID: 4367877705733166447}
   m_Layer: 0
   m_Name: OnHitVFX
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6676844569001482197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &848529710210319982
+--- !u!114 &4367877705733166447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3920955325633057499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b069e13b42547eabcfff6685313109, type: 3}
+  m_Script: {fileID: 11500000, guid: 62df4b6460da240af8e1adf8b9bc51c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VFX_AutioController
+  m_EditorClassIdentifier: Assembly-CSharp::VFX_AutoController
   autoDestroy: 0
   destroyDealy: 1
+  randomOffset: 1
+  randomRotation: 1
+  xMinOffset: -0.3
+  xMaxOffset: 0.3
+  yMinOffset: -0.3
+  yMaxOffset: 0.3
 --- !u!1 &8113196297390639055
 GameObject:
   m_ObjectHideFlags: 0
