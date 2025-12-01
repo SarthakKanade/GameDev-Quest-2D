@@ -6,8 +6,8 @@ public class Stat_OffenseGroup
 {
     //Physical damage
     public Stat damage;
-    public Stat critPower;
-    public Stat critRate;
+    public Stat criticalPower;
+    public Stat criticalChance;
 
     //Elemental damage
     public Stat fireDamage;

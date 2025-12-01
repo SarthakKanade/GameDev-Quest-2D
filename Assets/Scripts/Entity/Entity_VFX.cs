@@ -4,6 +4,7 @@ using System.Collections;
 public class Entity_VFX : MonoBehaviour
 {
     private SpriteRenderer sr;
+    private Entity entity;
 
     [Header("On Taking Damage VFX")]
     [SerializeField] private Material onDamageVFXMaterial;
@@ -12,8 +13,9 @@ public class Entity_VFX : MonoBehaviour
     private Coroutine onDamageVFXCo;
 
     [Header("On Giving Damage VFX")]
-    [SerializeField] private GameObject onHitVFX;
     [SerializeField] private Color onHitVFXColor = Color.white;
+    [SerializeField] private GameObject onHitVFX;
+    [SerializeField] private GameObject onCritHitVFX;
     
 
     [Header("Knockback VFX")]
@@ -22,16 +24,20 @@ public class Entity_VFX : MonoBehaviour
 
     protected void Awake()
     {
+        entity = GetComponent<Entity>();
         sr = GetComponentInChildren<SpriteRenderer>();
         defaultMaterial = sr.material;
     }
 
-    public void CreateOnHitVFX(Transform target)
+    public void CreateOnHitVFX(Transform target, bool isCritical)
     {
-        if (onHitVFX != null)
+        GameObject hitPrefab = isCritical ? onCritHitVFX : onHitVFX;
+        GameObject vfx = Instantiate(hitPrefab, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = onHitVFXColor;
+
+        if (entity.facingDirection == -1 && isCritical)
         {
-            GameObject vfx = Instantiate(onHitVFX, target.position, Quaternion.identity);
-            vfx.GetComponentInChildren<SpriteRenderer>().color = onHitVFXColor;
+            vfx.transform.Rotate(0, 180, 0);
         }
     }
 
