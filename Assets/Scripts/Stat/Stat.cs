@@ -1,10 +1,12 @@
 using UnityEngine;
+using System;
 
-public class Stat : MonoBehaviour
+[Serializable]
+public class Stat
 {
     [SerializeField] private float baseValue;
 
-    public float GetBalue()
+    public float GetValue()
     {
         return baseValue;
     }
