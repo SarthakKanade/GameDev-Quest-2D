@@ -14,6 +14,8 @@ public class Enemy_BattleState : EnemyState
     {
         base.Enter();
 
+        lastTimeWasInBattle = Time.time;
+
         if (player == null)
         {
             player = enemy.GetPlayerReference();
