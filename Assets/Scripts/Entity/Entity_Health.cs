@@ -40,7 +40,7 @@ public class Entity_Health : MonoBehaviour, IDamagable
         }
     }
 
-    public virtual bool TakeDamage(float damage, Transform damageDealer)
+    public virtual bool TakeDamage(float damage, float elementDamage, Transform damageDealer)
     {
         if (isDead)
         {

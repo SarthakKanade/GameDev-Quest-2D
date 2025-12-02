@@ -37,6 +37,41 @@ public class Entity_Stats : MonoBehaviour
         return finalDamage;
     }
 
+    public float GetElementalDamage()
+    {
+        float fireDamage = offenseGroup.fireDamage.GetValue();
+        float iceDamage = offenseGroup.iceDamage.GetValue();
+        float lightningDamage = offenseGroup.lightningDamage.GetValue();
+        float bonusElementalDamage = majorStats.intelligence.GetValue();
+
+        float highestDamage = fireDamage;
+
+        if (iceDamage > highestDamage)
+        {
+            highestDamage = iceDamage;
+        }
+
+        if (lightningDamage > highestDamage)
+        {
+            highestDamage = lightningDamage;
+        }
+
+        if (highestDamage <= 0)
+        {
+            return 0;
+        }
+
+        float bonusFireDamage = (fireDamage == highestDamage) ?  0 : fireDamage * 0.5f;
+        float bonusIceDamage = (iceDamage == highestDamage) ? 0 : iceDamage * 0.5f;
+        float bonusLightningDamage = (lightningDamage == highestDamage) ? 0 : lightningDamage * 0.5f;
+
+        float weakerElementalDamage = bonusFireDamage + bonusIceDamage + bonusLightningDamage;
+
+        float finalDamage = highestDamage + weakerElementalDamage + bonusElementalDamage;
+
+        return finalDamage;
+    }
+
     public float GetMaxHealth()
     {
         float baseMaxHealth = maxHealth.GetValue();
