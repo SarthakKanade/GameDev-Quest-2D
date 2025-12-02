@@ -8,6 +8,7 @@ public class Stat_OffenseGroup
     public Stat damage;
     public Stat criticalPower;
     public Stat criticalChance;
+    public Stat armorReduction;
 
     //Elemental damage
     public Stat fireDamage;

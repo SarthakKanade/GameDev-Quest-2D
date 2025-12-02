@@ -5,7 +5,7 @@ using System;
 public class Stat_DefenseGroup
 {
    //Physical defense
-   public Stat defense;
+   public Stat armor;
    public Stat evasion;
 
    //Elemental defense
