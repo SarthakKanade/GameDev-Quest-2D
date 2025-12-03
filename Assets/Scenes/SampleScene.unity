@@ -776,9 +776,11 @@ MonoBehaviour:
     damage:
       baseValue: 10
     criticalPower:
-      baseValue: 250
+      baseValue: 5
     criticalChance:
-      baseValue: 100
+      baseValue: 50
+    armorReduction:
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:
@@ -786,8 +788,8 @@ MonoBehaviour:
     lightningDamage:
       baseValue: 0
   defenseGroup:
-    defense:
-      baseValue: 0
+    armor:
+      baseValue: 40
     evasion:
       baseValue: 0
     fireResistance:
@@ -63062,10 +63064,12 @@ MonoBehaviour:
       baseValue: 0
   offenseGroup:
     damage:
-      baseValue: 0
+      baseValue: 10
     criticalPower:
       baseValue: 0
     criticalChance:
+      baseValue: 0
+    armorReduction:
       baseValue: 0
     fireDamage:
       baseValue: 0
@@ -63074,7 +63078,7 @@ MonoBehaviour:
     lightningDamage:
       baseValue: 0
   defenseGroup:
-    defense:
+    armor:
       baseValue: 0
     evasion:
       baseValue: 0

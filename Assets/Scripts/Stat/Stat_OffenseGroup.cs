@@ -15,3 +15,4 @@ public class Stat_OffenseGroup
     public Stat iceDamage;
     public Stat lightningDamage;
 }
+ 

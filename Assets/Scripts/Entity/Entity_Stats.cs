@@ -37,7 +37,7 @@ public class Entity_Stats : MonoBehaviour
         return finalDamage;
     }
 
-    public float GetElementalDamage()
+    public float GetElementalDamage(out ElementType element)
     {
         float fireDamage = offenseGroup.fireDamage.GetValue();
         float iceDamage = offenseGroup.iceDamage.GetValue();
@@ -45,20 +45,24 @@ public class Entity_Stats : MonoBehaviour
         float bonusElementalDamage = majorStats.intelligence.GetValue();
 
         float highestDamage = fireDamage;
+        element = ElementType.Fire;
 
         if (iceDamage > highestDamage)
         {
             highestDamage = iceDamage;
+            element = ElementType.Ice;
         }
 
         if (lightningDamage > highestDamage)
         {
             highestDamage = lightningDamage;
+            element = ElementType.Lightning;
         }
 
         if (highestDamage <= 0)
         {
             return 0;
+            element = ElementType.None;
         }
 
         float bonusFireDamage = (fireDamage == highestDamage) ?  0 : fireDamage * 0.5f;
@@ -70,6 +74,33 @@ public class Entity_Stats : MonoBehaviour
         float finalDamage = highestDamage + weakerElementalDamage + bonusElementalDamage;
 
         return finalDamage;
+    }
+
+    public float GetElementalResistance(ElementType element)
+    {
+        float baseResistance = 0;
+        float bonusResistance = majorStats.intelligence.GetValue() * 0.5f;
+
+        switch (element)
+        {
+            case ElementType.Fire:
+                baseResistance = defenseGroup.fireResistance.GetValue();
+                break;
+            case ElementType.Ice:
+                baseResistance = defenseGroup.iceResistance.GetValue();
+                break;
+            case ElementType.Lightning:
+                baseResistance = defenseGroup.lightningResistance.GetValue();
+                break;
+        }
+
+        float totalResistance = baseResistance + bonusResistance;
+
+        float resistanceCap = 0.75f;
+
+        float finalResistance = Mathf.Clamp(totalResistance, 0, resistanceCap);
+
+        return finalResistance;
     }
 
     public float GetMaxHealth()

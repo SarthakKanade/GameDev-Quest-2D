@@ -3,9 +3,9 @@ using UnityEngine;
 public class Enemy_Health : Entity_Health
 {
     private Enemy enemy => GetComponent<Enemy>();
-    public override bool TakeDamage(float damage, float elementDamage, Transform damageDealer)
+    public override bool TakeDamage(float damage, float elementDamage, ElementType element, Transform damageDealer)
     {
-        bool wasHit = base.TakeDamage(damage, elementDamage, damageDealer);
+        bool wasHit = base.TakeDamage(damage, elementDamage, element, damageDealer);
 
         if (!wasHit)
         {
