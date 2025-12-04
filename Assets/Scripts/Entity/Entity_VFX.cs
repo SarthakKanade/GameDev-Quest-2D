@@ -19,6 +19,7 @@ public class Entity_VFX : MonoBehaviour
     
     [Header("Element VFX")]
     [SerializeField] private Color chillVFX = Color.cyan;
+    [SerializeField] private Color burnVFX = Color.red;
     private Color originalOnHitVFXColor;
     
     protected void Awake()
@@ -46,6 +47,11 @@ public class Entity_VFX : MonoBehaviour
         if (element == ElementType.Ice)
         {
             onHitVFXColor = chillVFX;
+        }
+
+        if (element == ElementType.Fire)
+        {
+            onHitVFXColor = burnVFX;
         }
         
         if (element == ElementType.None)

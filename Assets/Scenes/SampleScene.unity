@@ -731,7 +731,8 @@ MonoBehaviour:
   onHitVFXColor: {r: 0.43038154, g: 1, b: 0, a: 1}
   onHitVFX: {fileID: 3920955325633057499, guid: e9fe0a8926a4d4c25875f0141dd13983, type: 3}
   onCritHitVFX: {fileID: 7865776812635269621, guid: baadabfe14e074bb58e6c5ca6fe83ae8, type: 3}
-  chillVFX: {r: 0, g: 1, b: 1, a: 1}
+  chillVFX: {r: 0.42352942, g: 0.69803923, b: 1, a: 1}
+  burnVFX: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &274070550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61789,6 +61790,7 @@ MonoBehaviour:
   onHitVFX: {fileID: 0}
   onCritHitVFX: {fileID: 0}
   chillVFX: {r: 0, g: 1, b: 1, a: 1}
+  burnVFX: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1006645087
 GameObject:
   m_ObjectHideFlags: 0
@@ -63055,7 +63057,8 @@ MonoBehaviour:
   onHitVFXColor: {r: 0.9811321, g: 0, b: 0, a: 1}
   onHitVFX: {fileID: 3920955325633057499, guid: e9fe0a8926a4d4c25875f0141dd13983, type: 3}
   onCritHitVFX: {fileID: 7865776812635269621, guid: baadabfe14e074bb58e6c5ca6fe83ae8, type: 3}
-  chillVFX: {r: 0, g: 1, b: 1, a: 1}
+  chillVFX: {r: 0.42352942, g: 0.69803923, b: 1, a: 1}
+  burnVFX: {r: 1, g: 0, b: 0, a: 1}
   attackAlert: {fileID: 1173102392}
 --- !u!114 &2066557400
 MonoBehaviour:
