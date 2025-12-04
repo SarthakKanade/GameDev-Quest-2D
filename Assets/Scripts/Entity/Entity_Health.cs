@@ -70,7 +70,6 @@ public class Entity_Health : MonoBehaviour, IDamagable
         TakeKnockback(physicalDamageTaken, damageDealer);
         
         ReduceHP(physicalDamageTaken + elementDamageTaken);
-        Debug.Log($"{gameObject.name} took {physicalDamageTaken + elementDamageTaken} damage of {element} from {damageDealer.name}");
         return true;
     }
     private void TakeKnockback(float finalDamage, Transform damageDealer)

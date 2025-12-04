@@ -17,16 +17,16 @@ public class Entity_VFX : MonoBehaviour
     [SerializeField] private GameObject onHitVFX;
     [SerializeField] private GameObject onCritHitVFX;
     
-
-    [Header("Knockback VFX")]
-    [SerializeField] private Vector2 knockbackPower;
-    private Coroutine knockbackVFXCo;
-
+    [Header("Element VFX")]
+    [SerializeField] private Color chillVFX = Color.cyan;
+    private Color originalOnHitVFXColor;
+    
     protected void Awake()
     {
         entity = GetComponent<Entity>();
         sr = GetComponentInChildren<SpriteRenderer>();
         defaultMaterial = sr.material;
+        originalOnHitVFXColor = onHitVFXColor;
     }
 
     public void CreateOnHitVFX(Transform target, bool isCritical)
@@ -38,6 +38,19 @@ public class Entity_VFX : MonoBehaviour
         if (entity.facingDirection == -1 && isCritical)
         {
             vfx.transform.Rotate(0, 180, 0);
+        }
+    }
+
+    public void UpdateOnHitVFXColor(ElementType element)
+    {
+        if (element == ElementType.Ice)
+        {
+            onHitVFXColor = chillVFX;
+        }
+        
+        if (element == ElementType.None)
+        {
+            onHitVFXColor = originalOnHitVFXColor;
         }
     }
 
@@ -56,5 +69,36 @@ public class Entity_VFX : MonoBehaviour
         sr.material = onDamageVFXMaterial;
         yield return new WaitForSeconds(onDamageVFXDuration);
         sr.material = defaultMaterial;
+    }
+
+    public void PlayOnStatusEffectVFX(float duration, ElementType element)
+    {
+        if (element == ElementType.Ice)
+        {
+           StartCoroutine(StatusEffectCo(duration, chillVFX));
+        }
+
+    }
+
+    private IEnumerator StatusEffectCo(float duration, Color effectVFXColor)
+    {
+        Color lightColor = effectVFXColor * 1.2f;
+        Color darkColor = effectVFXColor * 0.8f;
+        
+        float tickInterval = 0.25f;
+        float timeHasPassed = 0f;
+
+        bool effectColorToggle = false;
+        
+        while (timeHasPassed < duration)
+        {
+            sr.color = effectColorToggle ? lightColor : darkColor;
+            effectColorToggle = !effectColorToggle;
+            
+            yield return new WaitForSeconds(tickInterval);
+            timeHasPassed = timeHasPassed + tickInterval;
+        }
+
+        sr.color = Color.white;
     }
 }

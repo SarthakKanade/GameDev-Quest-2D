@@ -26,6 +26,7 @@ public class Entity : MonoBehaviour
     // Status Vribales
     private bool isKnockbacked;
     private Coroutine knockbackCo;
+    private Coroutine slowDownCo;
 
 
     protected virtual void Awake()
@@ -49,7 +50,19 @@ public class Entity : MonoBehaviour
 
     public virtual void EntityDeath()
     {
-        
+    }
+
+    public virtual void SlowDownEntity(float duration, float slowDownMultiplier)
+    {
+        if(slowDownCo != null)
+            StopCoroutine(slowDownCo);
+
+        slowDownCo = StartCoroutine(SlowDownCo(duration, slowDownMultiplier));
+    }
+
+    protected virtual IEnumerator SlowDownCo(float duration, float slowDownMultiplier)
+    {
+        yield return null;
     }
 
     public void CurrentStateAnimationTrigger()
