@@ -61,8 +61,8 @@ public class Entity_Stats : MonoBehaviour
 
         if (highestDamage <= 0)
         {
-            return 0;
             element = ElementType.None;
+            return 0;
         }
 
         float bonusFireDamage = (fireDamage == highestDamage) ?  0 : fireDamage * 0.5f;

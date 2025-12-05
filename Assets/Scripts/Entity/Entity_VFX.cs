@@ -20,6 +20,7 @@ public class Entity_VFX : MonoBehaviour
     [Header("Element VFX")]
     [SerializeField] private Color chillVFX = Color.cyan;
     [SerializeField] private Color burnVFX = Color.red;
+    [SerializeField] private Color electrifyVFX = Color.yellow;
     private Color originalOnHitVFXColor;
     
     protected void Awake()
@@ -81,26 +82,42 @@ public class Entity_VFX : MonoBehaviour
     {
         if (element == ElementType.Ice)
         {
-           StartCoroutine(StatusEffectCo(duration, chillVFX));
+            StartCoroutine(StatusEffectCo(duration, chillVFX));
         }
 
+        if (element == ElementType.Fire)
+        {
+            StartCoroutine(StatusEffectCo(duration, burnVFX));
+        }
+        
+        if (element == ElementType.Lightning)
+        {
+            StartCoroutine(StatusEffectCo(duration, electrifyVFX));
+        }
+    }
+    
+    public void StopAllVFX()
+    {
+        StopAllCoroutines();
+        sr.color = Color.white;
+        sr.material = defaultMaterial;
     }
 
     private IEnumerator StatusEffectCo(float duration, Color effectVFXColor)
     {
         Color lightColor = effectVFXColor * 1.2f;
         Color darkColor = effectVFXColor * 0.8f;
-        
+
         float tickInterval = 0.25f;
         float timeHasPassed = 0f;
 
         bool effectColorToggle = false;
-        
+
         while (timeHasPassed < duration)
         {
             sr.color = effectColorToggle ? lightColor : darkColor;
             effectColorToggle = !effectColorToggle;
-            
+
             yield return new WaitForSeconds(tickInterval);
             timeHasPassed = timeHasPassed + tickInterval;
         }
