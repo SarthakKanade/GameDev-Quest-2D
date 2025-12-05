@@ -73,14 +73,14 @@ public class Entity_Combat : MonoBehaviour
         if (element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
         {
             scaleFactor *= fireScale;
-            float fireDamage = stats.offenseGroup.fireDamage.GetValue() * scaleFactor;
+            float fireDamage = stats.offenseStats.fireDamage.GetValue() * scaleFactor;
             statusHandler.ApplyBurnStatusEffect(defaultDuration, fireDamage);
         }
 
         if (element == ElementType.Lightning && statusHandler.CanBeApplied(ElementType.Lightning))
         {
             scaleFactor *= lightningScale;
-            float lightningDamage = stats.offenseGroup.lightningDamage.GetValue() * scaleFactor;
+            float lightningDamage = stats.offenseStats.lightningDamage.GetValue() * scaleFactor;
             statusHandler.ApplyLightningStatusEffect(defaultDuration, lightningDamage, electrifyChargeBuildUp);
 
 
