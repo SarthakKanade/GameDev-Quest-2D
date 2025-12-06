@@ -9,7 +9,7 @@ public class Stat
     [SerializeField] private float baseValue;
     [SerializeField] private List<StatModifier> modifiers = new List<StatModifier>();
 
-    private bool wasModified = true;
+    private bool wasModified;
     private float finalValue;
 
     public float GetValue()
@@ -45,6 +45,13 @@ public class Stat
         return finalValue;
     }
 
+    public void SetBaseValue(float value)
+    {
+        baseValue = value;
+        wasModified = true;
+    }
+
+}
     [Serializable]
     public class StatModifier
     {
@@ -57,4 +64,3 @@ public class Stat
             this.source = source;
         }
     }
-}
