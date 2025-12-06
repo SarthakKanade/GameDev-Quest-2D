@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour, IDamagable
+public class Object_Chest : MonoBehaviour, IDamagable
 {
     private Animator anim => GetComponentInChildren<Animator>();
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
