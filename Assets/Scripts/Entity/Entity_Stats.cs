@@ -152,4 +152,71 @@ public class Entity_Stats : MonoBehaviour
 
         return finalEvasion;
     }
+
+    public Stat GetStatByType(Stat_Type statType)
+    {
+        switch (statType)
+        {
+            case Stat_Type.MaxHealth:
+                return resources.maxHealth;
+
+            case Stat_Type.HealthRegen:
+                return resources.healthRegen;
+
+            case Stat_Type.Strength:
+                return majorStats.strength;
+
+            case Stat_Type.Intelligence:
+                return majorStats.intelligence;
+
+            case Stat_Type.Agility:
+                return majorStats.agility;
+
+            case Stat_Type.Vitality:
+                return majorStats.vitality;
+
+            case Stat_Type.AttackSpeed:
+                return offenseStats.attackSpeed;
+
+            case Stat_Type.Damage:
+                return offenseStats.damage;
+
+            case Stat_Type.CriticalChance:
+                return offenseStats.criticalChance;
+
+            case Stat_Type.CriticalPower:
+                return offenseStats.criticalPower;
+
+            case Stat_Type.FireDamage:
+                return offenseStats.fireDamage;
+
+            case Stat_Type.IceDamage:
+                return offenseStats.iceDamage;
+
+            case Stat_Type.LightningDamage:
+                return offenseStats.lightningDamage;
+
+            case Stat_Type.ArmorReduction:
+                return offenseStats.armorReduction;
+
+            case Stat_Type.Armor:
+                return defenseStats.armor;
+
+            case Stat_Type.Evasion:
+                return defenseStats.evasion;
+
+            case Stat_Type.FireResistance:
+                return defenseStats.fireResistance;
+
+            case Stat_Type.IceResistance:
+                return defenseStats.iceResistance;
+
+            case Stat_Type.LightningResistance:
+                return defenseStats.lightningResistance;
+
+            default:
+                Debug.LogWarning("Invalid Stat Type: " + statType);
+                return null;
+        }
+    }
 }
