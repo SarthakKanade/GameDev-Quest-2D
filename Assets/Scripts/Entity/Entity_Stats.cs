@@ -8,6 +8,11 @@ public class Entity_Stats : MonoBehaviour
     public Stat_DefenseGroup defenseStats;
     public Stat_MajorGroup majorStats;
 
+    private void Awake()
+    {
+        SetDefaultStats();
+    }
+
     public float GetPhysicalDamage(out bool isCritical, float scaleFactor = 1)
     {
         float baseDamage = offenseStats.damage.GetValue();

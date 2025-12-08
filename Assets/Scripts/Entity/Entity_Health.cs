@@ -33,10 +33,13 @@ public class Entity_Health : MonoBehaviour, IDamagable
         entityVFX = GetComponent<Entity_VFX>();
         entityStats = GetComponent<Entity_Stats>();
 
+        InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
+    }
+
+    protected virtual void Start()
+    {
         currentHealth = entityStats.GetMaxHealth();
         UpdateHealthBar();
-
-        InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
     }
     
     private void UpdateHealthBar()
