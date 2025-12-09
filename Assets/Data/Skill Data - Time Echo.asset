@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Skill Data - Time Echo
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
   cost: 0
-  skillName: 
-  skillDescription: 
-  Icon: {fileID: 0}
+  skillName: Time Echo
+  skillDescription: 'Creates a time echo of yourself.
+
+    The echo will distract
+    enemies.'
+  Icon: {fileID: 1753248431, guid: 2b9704fc6c5954ec7b4f4793f4d8acb4, type: 3}

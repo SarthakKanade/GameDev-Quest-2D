@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
+    private UI ui;
+    private RectTransform rectT;
+
     [SerializeField] private Skill_DataSO skillData;
     [SerializeField] private string skillName;
     [SerializeField] private Image skillIcon;
@@ -13,20 +16,10 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool isLocked;
     public bool isUnlocked;
 
-    private void OnValidate()
-    {
-        if (skillData == null)
-        {
-            return;
-        }
-
-        skillName = skillData.skillName;
-        skillIcon.sprite = skillData.Icon;
-        gameObject.name = "UI_TreeNode - " + skillData.skillName;
-    }
-
     private void Awake()
     {
+        ui = GetComponentInParent<UI>();
+        rectT = GetComponent<RectTransform>();
         UpdateIconColor(UpdateHexColor(lockedColorHex));
     }
 
@@ -63,6 +56,8 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             UpdateIconColor(Color.white * 0.8f);
         }
+
+        ui.skillToolTip.ShowToolTip(true, rectT, skillData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -71,6 +66,8 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             UpdateIconColor(lastIconColor);
         }
+
+        ui.skillToolTip.ShowToolTip(false, rectT);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -85,5 +82,17 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         ColorUtility.TryParseHtmlString(hexColor, out Color color);
         return color;
+    }
+
+    private void OnValidate()
+    {
+        if (skillData == null)
+        {
+            return;
+        }
+
+        skillName = skillData.skillName;
+        skillIcon.sprite = skillData.Icon;
+        gameObject.name = "UI_TreeNode - " + skillData.skillName;
     }
 }
