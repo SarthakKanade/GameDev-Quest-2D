@@ -2,7 +2,22 @@ using UnityEngine;
 
 public class UI_SkillTree : MonoBehaviour
 {
-    public int skillPoints;
+    [SerializeField] private int skillPoints;
+    [SerializeField] private UI_TreeConnectionHandler[] parentNodes;
+
+    private void Start()
+    {
+        UpdateAllConnections();
+    }
+
+    public void RefundAllSkill()
+    {
+        UI_TreeNode[] skillNodes = GetComponentsInChildren<UI_TreeNode>();
+        foreach (var node in skillNodes)
+        {
+            node.Refund();
+        }
+    }
 
     public bool EnoughtSkillPoints(int cost)
     {
@@ -12,5 +27,19 @@ public class UI_SkillTree : MonoBehaviour
     public void RemoveSkillPoint(int cost)
     {
         skillPoints -= cost;
+    }
+
+    public void AddSkillPoint(int points)
+    {
+        skillPoints += points;
+    }
+
+    [ContextMenu("Update All Connections")]
+    public void UpdateAllConnections()
+    {
+        foreach (var node in parentNodes)
+        {
+            node.UpdateAllConnections();
+        }
     }
 }
