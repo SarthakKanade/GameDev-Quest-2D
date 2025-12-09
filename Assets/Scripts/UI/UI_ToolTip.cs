@@ -7,7 +7,7 @@ public class UI_ToolTip : MonoBehaviour
     // private float yOffset = 20;
     [SerializeField] private Vector2 offset = new Vector2(300, 20);
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rectT = GetComponent<RectTransform>();
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe17c9c425fad43fba1b4874820b660d, type: 3}
   m_Name: Skill Data - Time Echo
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
-  cost: 0
+  cost: 2
   skillName: Time Echo
   skillDescription: 'Creates a time echo of yourself.
 
