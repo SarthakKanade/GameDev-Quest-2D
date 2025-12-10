@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skill Data - Timeless Attack
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
   cost: 2
-  skillName: Timeless Attack
+  skillName: Temporal Jab
   skillDescription: The Time echo does one attack
   Icon: {fileID: 1799480653, guid: 2b9704fc6c5954ec7b4f4793f4d8acb4, type: 3}

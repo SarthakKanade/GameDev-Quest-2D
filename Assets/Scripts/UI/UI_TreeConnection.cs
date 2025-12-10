@@ -62,7 +62,7 @@ public class UI_TreeConnection : MonoBehaviour
                 return 0;
         }
     }
-}
+} 
 
 public enum NodeDirectionType
 {

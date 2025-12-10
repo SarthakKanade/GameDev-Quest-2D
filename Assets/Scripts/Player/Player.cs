@@ -7,6 +7,7 @@ public class Player : Entity
     public static event Action OnPlayerDeath;
     public UI ui;
     public PlayerInputSet input { get; private set; }
+    public Player_SkillManager skillManager {get; private set;}
 
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
@@ -49,6 +50,8 @@ public class Player : Entity
         ui = FindAnyObjectByType<UI>();
 
         input = new PlayerInputSet();
+
+        skillManager = GetComponent<Player_SkillManager>();
 
 
         idleState = new Player_IdleState(this, stateMachine, "idle");
