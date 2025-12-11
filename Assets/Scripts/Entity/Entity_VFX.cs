@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Entity_VFX : MonoBehaviour
 {
-    private SpriteRenderer sr;
-    private Entity entity;
+    protected SpriteRenderer sr;
+    protected Entity entity;
 
     [Header("On Taking Damage VFX")]
     [SerializeField] private Material onDamageVFXMaterial;

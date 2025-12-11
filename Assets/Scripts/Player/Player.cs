@@ -8,6 +8,7 @@ public class Player : Entity
     public UI ui;
     public PlayerInputSet input { get; private set; }
     public Player_SkillManager skillManager {get; private set;}
+    public Player_VFX playerVFX {get; private set;}
 
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
@@ -52,6 +53,8 @@ public class Player : Entity
         input = new PlayerInputSet();
 
         skillManager = GetComponent<Player_SkillManager>();
+
+        playerVFX = GetComponent<Player_VFX>();
 
 
         idleState = new Player_IdleState(this, stateMachine, "idle");

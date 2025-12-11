@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum SkillUpgadeType
+public enum SkillUpgradeType
 {
     Dash,
     Dash_CloneOnStart,
