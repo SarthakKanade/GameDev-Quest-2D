@@ -12,7 +12,7 @@ public class UI : MonoBehaviour
         skillTree = GetComponentInChildren<UI_SkillTree>(true);
     }
 
-    public void ToogleSkillTreeUI()
+    public void ToggleSkillTreeUI()
     {
         skillTreeEnabled = !skillTreeEnabled;
         skillTree.gameObject.SetActive(skillTreeEnabled);

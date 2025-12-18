@@ -1,14 +1,19 @@
 using System;
-using System.Collections;      
+using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : Entity
 {
     public static event Action OnPlayerDeath;
-    public UI ui;
+
+    private UI ui;
     public PlayerInputSet input { get; private set; }
-    public Player_SkillManager skillManager {get; private set;}
-    public Player_VFX playerVFX {get; private set;}
+    public Player_SkillManager skillManager { get; private set; }
+    public Player_VFX vfx { get; private set; }
+
+
+    #region State Variables
 
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
@@ -22,13 +27,14 @@ public class Player : Entity
     public Player_DeadState deadState { get; private set; }
     public Player_CounterAttackState counterAttackState { get; private set; }
 
+    #endregion
+
     [Header("Attack details")]
     public Vector2[] attackVelocity;
     public Vector2 jumpAttackVelocity;
     public float attackVelocityDuration = .1f;
     public float comboResetTime = 1;
     private Coroutine queuedAttackCo;
-
 
 
     [Header("Movement details")]
@@ -49,12 +55,9 @@ public class Player : Entity
         base.Awake();
 
         ui = FindAnyObjectByType<UI>();
-
         input = new PlayerInputSet();
-
         skillManager = GetComponent<Player_SkillManager>();
-
-        playerVFX = GetComponent<Player_VFX>();
+        vfx = GetComponent<Player_VFX>();
 
 
         idleState = new Player_IdleState(this, stateMachine, "idle");
@@ -76,27 +79,28 @@ public class Player : Entity
         stateMachine.Initialize(idleState);
     }
 
-    protected override IEnumerator SlowDownCo(float duration, float slowDownMultiplier)
+    public void TeleportPlayer(Vector3 position) => transform.position = position;
+
+    protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
     {
         float originalMoveSpeed = moveSpeed;
         float originalJumpForce = jumpForce;
         float originalAnimSpeed = anim.speed;
-        Vector2 originalWallJumpForce = wallJumpForce;
-        Vector2 originalJumpAttackVelocity = jumpAttackVelocity;
-        Vector2[] originalAttackVelocity = new Vector2[attackVelocity.Length];
-        Array.Copy(attackVelocity, originalAttackVelocity, attackVelocity.Length);
+        Vector2 originalWallJump = wallJumpForce;
+        Vector2 originalJumpAttack = jumpAttackVelocity;
+        Vector2[] originalAttackVelocity = attackVelocity;
 
-        float speedMultiplier = 1 - slowDownMultiplier;
+        float speedMultiplier = 1 - slowMultiplier;
 
-        moveSpeed *= speedMultiplier;
-        anim.speed *= speedMultiplier;
-        jumpForce *= speedMultiplier;
-        wallJumpForce *= speedMultiplier;
-        jumpAttackVelocity *= speedMultiplier;
+        moveSpeed = moveSpeed * speedMultiplier;
+        jumpForce = jumpForce * speedMultiplier;
+        anim.speed = anim.speed * speedMultiplier;
+        wallJumpForce = wallJumpForce * speedMultiplier;
+        jumpAttackVelocity = jumpAttackVelocity * speedMultiplier;
 
         for (int i = 0; i < attackVelocity.Length; i++)
         {
-            attackVelocity[i] *= speedMultiplier;
+            attackVelocity[i] = attackVelocity[i] * speedMultiplier;
         }
 
         yield return new WaitForSeconds(duration);
@@ -104,13 +108,21 @@ public class Player : Entity
         moveSpeed = originalMoveSpeed;
         jumpForce = originalJumpForce;
         anim.speed = originalAnimSpeed;
-        wallJumpForce = originalWallJumpForce;
-        jumpAttackVelocity = originalJumpAttackVelocity;
+        wallJumpForce = originalWallJump;
+        jumpAttackVelocity = originalJumpAttack;
 
         for (int i = 0; i < attackVelocity.Length; i++)
         {
             attackVelocity[i] = originalAttackVelocity[i];
         }
+    }
+
+    public override void EntityDeath()
+    {
+        base.EntityDeath();
+
+        OnPlayerDeath?.Invoke();
+        stateMachine.ChangeState(deadState);
     }
 
     public void EnterAttackStateWithDelay()
@@ -127,14 +139,6 @@ public class Player : Entity
         stateMachine.ChangeState(basicAttackState);
     }
 
-    public override void EntityDeath()
-    {
-        base.EntityDeath();
-
-        OnPlayerDeath?.Invoke();
-        stateMachine.ChangeState(deadState);
-    }
-
     private void OnEnable()
     {
         input.Enable();
@@ -142,7 +146,8 @@ public class Player : Entity
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
 
-        input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToogleSkillTreeUI();
+        input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
+        input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
     }
 
     private void OnDisable()

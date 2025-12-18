@@ -16,9 +16,7 @@ public class StateMachine
     public void ChangeState(EntityState newState)
     {
         if (canChangeState == false)
-        {
             return;
-        }
 
         currentState.Exit();
         currentState = newState;
@@ -30,8 +28,5 @@ public class StateMachine
         currentState.Update();        
     }
 
-    public void SwitchOffStateMachine()
-    {
-        canChangeState = false;
-    }
+    public void SwitchOffStateMachine() => canChangeState = false;
 }

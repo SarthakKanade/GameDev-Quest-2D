@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Player_DeadState : PlayerState
@@ -10,6 +9,7 @@ public class Player_DeadState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
         input.Disable();
         rb.simulated = false;
     }

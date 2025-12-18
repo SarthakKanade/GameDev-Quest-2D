@@ -3,7 +3,7 @@ using UnityEngine;
 public class UI_MiniHealthBar : MonoBehaviour
 {
     private Entity entity;
-    
+
     private void Awake()
     {
         entity = GetComponentInParent<Entity>();
@@ -11,16 +11,19 @@ public class UI_MiniHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        entity.OnFlipped += HandelFlip;
+        if (entity == null)
+            return;
+
+        entity.OnFlipped += HandleFlip;
     }
 
     private void OnDisable()
     {
-        entity.OnFlipped -= HandelFlip;
+        if (entity == null)
+            return;
+
+        entity.OnFlipped -= HandleFlip;
     }
 
-    private void HandelFlip()
-    {
-        transform.rotation = Quaternion.identity;
-    }
+    private void HandleFlip() => transform.rotation = Quaternion.identity;
 }

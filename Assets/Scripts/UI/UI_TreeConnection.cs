@@ -7,62 +7,50 @@ public class UI_TreeConnection : MonoBehaviour
     [SerializeField] private RectTransform connectionLength;
     [SerializeField] private RectTransform childNodeConnectionPoint;
 
-    public void DirectConection(NodeDirectionType direction, float Length, float rotation)
-    {
-        bool shouldbeActive = direction != NodeDirectionType.None;
 
-        float finalLength = shouldbeActive ? Length : 0;
+    public void DirectConnection(NodeDirectionType direction, float length,float offset)
+    {
+        bool shouldBeActive = direction != NodeDirectionType.None;
+        float finalLength = shouldBeActive ? length : 0;
         float angle = GetDirectionAngle(direction);
 
-        rotationPoint.localRotation = Quaternion.Euler(0, 0, angle + rotation);
+        rotationPoint.localRotation = Quaternion.Euler(0,0,angle + offset);
         connectionLength.sizeDelta = new Vector2(finalLength, connectionLength.sizeDelta.y);
     }
 
-    public Image GetConnectionImage()
-    {
-        return connectionLength.GetComponent<Image>();
-    }
+    public Image GetConnectionImage() => connectionLength.GetComponent<Image>();
 
-    public Vector2 GetChildNodeConnectionPoint(RectTransform rect)
+    public Vector2 GetConnectionPoint(RectTransform rect)
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle
-        (
-            rect.parent as RectTransform,
-            childNodeConnectionPoint.position,
-            null,
-            out Vector2 localPoint
-        );
+            (
+                rect.parent as RectTransform,
+                childNodeConnectionPoint.position,
+                null,
+                out var localPosition
+            );
 
-        return localPoint;
+        return localPosition;
     }
-    
 
 
-    private float GetDirectionAngle(NodeDirectionType direction)
+    private float GetDirectionAngle(NodeDirectionType type)
     {
-        switch (direction)
+        switch (type)
         {
-            case NodeDirectionType.UpLeft:
-                return 135;
-            case NodeDirectionType.Up:
-                return 90;
-            case NodeDirectionType.UpRight:
-                return 45;
-            case NodeDirectionType.Right:
-                return 0;
-            case NodeDirectionType.DownRight:
-                return -45;
-            case NodeDirectionType.Down:
-                return -90;
-            case NodeDirectionType.DownLeft:
-                return -135;
-            case NodeDirectionType.Left:
-                return 180;
-            default:
-                return 0;
+            case NodeDirectionType.UpLeft: return 135f;
+            case NodeDirectionType.Up: return 90f;
+            case NodeDirectionType.UpRight: return 45f;
+            case NodeDirectionType.Left: return 180f;
+            case NodeDirectionType.Right: return 0f;
+            case NodeDirectionType.DownLeft: return -135f;
+            case NodeDirectionType.Down: return -90;
+            case NodeDirectionType.DownRight: return -45f;
+            default: return 0f;
         }
     }
-} 
+}
+
 
 public enum NodeDirectionType
 {
@@ -70,9 +58,9 @@ public enum NodeDirectionType
     UpLeft,
     Up,
     UpRight,
+    Left,
     Right,
-    DownRight,
-    Down,
     DownLeft,
-    Left
+    Down,
+    DownRight
 }

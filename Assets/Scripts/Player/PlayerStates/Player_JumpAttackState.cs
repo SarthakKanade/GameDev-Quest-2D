@@ -13,7 +13,7 @@ public class Player_JumpAttackState : PlayerState
         base.Enter();
         touchedGround = false;
 
-        player.SetVelocity(player.jumpAttackVelocity.x * player.facingDirection, player.jumpAttackVelocity.y);
+        player.SetVelocity(player.jumpAttackVelocity.x * player.facingDir, player.jumpAttackVelocity.y);
     }
 
     public override void Update()

@@ -22,7 +22,7 @@ public class Player_WallSlideState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
 
-            if(player.facingDirection != player.moveInput.x)
+            if(player.facingDir != player.moveInput.x)
                 player.Flip();
         }
     }

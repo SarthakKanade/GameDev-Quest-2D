@@ -1,127 +1,119 @@
-using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Entity_VFX : MonoBehaviour
 {
+
     protected SpriteRenderer sr;
-    protected Entity entity;
+    private Entity entity;
 
     [Header("On Taking Damage VFX")]
-    [SerializeField] private Material onDamageVFXMaterial;
-    [SerializeField] private float onDamageVFXDuration = .15f;
-    private Material defaultMaterial;
-    private Coroutine onDamageVFXCo;
+    [SerializeField] private Material onDamageMaterial;
+    [SerializeField] private float onDamageVfxDuration = .2f;
+    private Material originalMaterial;
+    private Coroutine onDamageVfxCoroutine;
 
-    [Header("On Giving Damage VFX")]
-    [SerializeField] private Color onHitVFXColor = Color.white;
-    [SerializeField] private GameObject onHitVFX;
-    [SerializeField] private GameObject onCritHitVFX;
-    
-    [Header("Element VFX")]
-    [SerializeField] private Color chillVFX = Color.cyan;
-    [SerializeField] private Color burnVFX = Color.red;
-    [SerializeField] private Color electrifyVFX = Color.yellow;
-    private Color originalOnHitVFXColor;
-    
-    protected void Awake()
+    [Header("On Doing Damage VFX")]
+    [SerializeField] private Color hitVfxColor = Color.white;
+    [SerializeField] private GameObject hitVfx;
+    [SerializeField] private GameObject critHitVfx;
+
+    [Header("Element Colors")]
+    [SerializeField] private Color chillVfx = Color.cyan;
+    [SerializeField] private Color burnVfx = Color.red;
+    [SerializeField] private Color shockVfx = Color.yellow;
+    private Color originalHitVfxColor;
+
+    protected virtual void Awake()
     {
         entity = GetComponent<Entity>();
         sr = GetComponentInChildren<SpriteRenderer>();
-        defaultMaterial = sr.material;
-        originalOnHitVFXColor = onHitVFXColor;
+        originalMaterial = sr.material;
+        originalHitVfxColor = hitVfxColor;
     }
 
-    public void CreateOnHitVFX(Transform target, bool isCritical)
-    {
-        GameObject hitPrefab = isCritical ? onCritHitVFX : onHitVFX;
-        GameObject vfx = Instantiate(hitPrefab, target.position, Quaternion.identity);
-        vfx.GetComponentInChildren<SpriteRenderer>().color = onHitVFXColor;
-
-        if (entity.facingDirection == -1 && isCritical)
-        {
-            vfx.transform.Rotate(0, 180, 0);
-        }
-    }
-
-    public void UpdateOnHitVFXColor(ElementType element)
+    public void PlayOnStatusVfx(float duration, ElementType element)
     {
         if (element == ElementType.Ice)
-        {
-            onHitVFXColor = chillVFX;
-        }
+            StartCoroutine(PlayStatusVfxCo(duration, chillVfx));
 
         if (element == ElementType.Fire)
-        {
-            onHitVFXColor = burnVFX;
-        }
-        
-        if (element == ElementType.None)
-        {
-            onHitVFXColor = originalOnHitVFXColor;
-        }
+            StartCoroutine(PlayStatusVfxCo(duration, burnVfx));
+
+        if(element == ElementType.Lightning)
+            StartCoroutine(PlayStatusVfxCo(duration, shockVfx));
+            
     }
 
-    public void PlayOnDamageVFX()
-    {
-        if (onDamageVFXCo != null)
-        {
-            StopCoroutine(onDamageVFXCo);
-        }
-
-        onDamageVFXCo = StartCoroutine(OnDamageVFXCo());
-    }
-
-    private IEnumerator OnDamageVFXCo()
-    {
-        sr.material = onDamageVFXMaterial;
-        yield return new WaitForSeconds(onDamageVFXDuration);
-        sr.material = defaultMaterial;
-    }
-
-    public void PlayOnStatusEffectVFX(float duration, ElementType element)
-    {
-        if (element == ElementType.Ice)
-        {
-            StartCoroutine(StatusEffectCo(duration, chillVFX));
-        }
-
-        if (element == ElementType.Fire)
-        {
-            StartCoroutine(StatusEffectCo(duration, burnVFX));
-        }
-        
-        if (element == ElementType.Lightning)
-        {
-            StartCoroutine(StatusEffectCo(duration, electrifyVFX));
-        }
-    }
-    
-    public void StopAllVFX()
+    public void StopAllVfx()
     {
         StopAllCoroutines();
         sr.color = Color.white;
-        sr.material = defaultMaterial;
+        sr.material = originalMaterial;
     }
 
-    private IEnumerator StatusEffectCo(float duration, Color effectVFXColor)
+    private IEnumerator PlayStatusVfxCo(float duration, Color effectColor)
     {
-        Color lightColor = effectVFXColor * 1.2f;
-        Color darkColor = effectVFXColor * 0.8f;
+        float tickInterval = .25f;
+        float timeHasPassed = 0;
 
-        float tickInterval = 0.25f;
-        float timeHasPassed = 0f;
+        Color lightColor = effectColor * 1.2f;
+        Color darkColor = effectColor * .9f;
 
-        bool effectColorToggle = false;
+        bool toggle = false;
 
         while (timeHasPassed < duration)
         {
-            sr.color = effectColorToggle ? lightColor : darkColor;
-            effectColorToggle = !effectColorToggle;
+            sr.color = toggle ? lightColor : darkColor;
+            toggle = !toggle;
 
             yield return new WaitForSeconds(tickInterval);
             timeHasPassed = timeHasPassed + tickInterval;
         }
 
         sr.color = Color.white;
+    }
+
+    public void CreateOnHitVFX(Transform target,bool isCrit,ElementType element)
+    {
+        GameObject hitPrefab = isCrit ? critHitVfx : hitVfx;
+        GameObject vfx = Instantiate(hitPrefab, target.position, Quaternion.identity);
+        //vfx.GetComponentInChildren<SpriteRenderer>().color = GetElementColor(element);
+
+        if (entity.facingDir == -1 && isCrit)
+            vfx.transform.Rotate(0, 180, 0);
+    }
+
+    public Color GetElementColor(ElementType element)
+    {
+        switch (element)
+        {
+            case ElementType.Ice:
+                return chillVfx;
+                case ElementType.Fire:
+                return burnVfx;
+            case ElementType.Lightning:
+                return shockVfx;
+
+            default:
+                return Color.white;
+        }
+    }
+
+    public void PlayOnDamageVfx()
+    {
+        if(onDamageVfxCoroutine != null)
+            StopCoroutine(onDamageVfxCoroutine);
+
+        onDamageVfxCoroutine = StartCoroutine(OnDamageVfxCo());
+    }
+
+    private IEnumerator OnDamageVfxCo()
+    {
+        sr.material = onDamageMaterial;
+
+        yield return new WaitForSeconds(onDamageVfxDuration);
+        sr.material = originalMaterial;
     }
 }

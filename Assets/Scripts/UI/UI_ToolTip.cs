@@ -1,58 +1,48 @@
+using System.Data;
 using UnityEngine;
 
 public class UI_ToolTip : MonoBehaviour
 {
-    private RectTransform rectT;
-    // private float xOffset = 300;
-    // private float yOffset = 20;
+    private RectTransform rect;
     [SerializeField] private Vector2 offset = new Vector2(300, 20);
 
     protected virtual void Awake()
     {
-        rectT = GetComponent<RectTransform>();
+        rect = GetComponent<RectTransform>();
     }
 
-    public virtual void ShowToolTip(bool show, RectTransform targetRectT)
+    public virtual void ShowToolTip(bool show, RectTransform targetRect)
     {
-        if (!show)
+        if (show == false)
         {
-            rectT.position = new Vector3(10000, 10000, 10000);
+            rect.position = new Vector2(9999, 9999);
             return;
         }
 
-        UpdatePosition(targetRectT);
+        UpdatePosition(targetRect); 
     }
 
-    private void UpdatePosition(RectTransform targetRectT)
+    private void UpdatePosition(RectTransform targetRect)
     {
-        float screenCenterX = Screen.width / 2;
+        float screenCenterX = Screen.width / 2f;
         float screenTop = Screen.height;
         float screenBottom = 0;
 
-        Vector2 targetPosition = targetRectT.position;
-        if (targetPosition.x < screenCenterX)
-        {
-            targetPosition.x += offset.x;
-        }
-        else
-        {
-            targetPosition.x -= offset.x;
-        }
+        Vector2 targetPosition = targetRect.position;
 
-        float rectVerticalHalf = (rectT.sizeDelta.y / 2);
-        float rectTopY = targetPosition.y + rectVerticalHalf;
-        float rectBottomY = targetPosition.y - rectVerticalHalf;
+        targetPosition.x = targetPosition.x > screenCenterX ? targetPosition.x - offset.x : targetPosition.x + offset.x;
 
-        if (rectTopY > screenTop)
-        {
-            targetPosition.y = screenTop - rectVerticalHalf - offset.y;
-        }
-        else if (rectBottomY < screenBottom)
-        {
-            targetPosition.y = screenBottom + rectVerticalHalf + offset.y;
-        }
+        float veritcalHalf = rect.sizeDelta.y / 2f;
+        float topY = targetPosition.y + veritcalHalf;
+        float bottomY = targetPosition.y - veritcalHalf;
 
-        rectT.position = targetPosition;
+        if (topY > screenTop)
+            targetPosition.y = screenTop - veritcalHalf - offset.y;
+        else if(bottomY < screenBottom)
+            targetPosition.y = screenBottom + veritcalHalf + offset.y;
+
+
+        rect.position = targetPosition;
     }
 
     protected string GetColoredText(string color, string text)

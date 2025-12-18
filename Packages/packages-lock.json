@@ -117,7 +117,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.10.0",
+      "version": "2.7.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -158,7 +158,7 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.38",
+      "version": "3.0.31",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -167,25 +167,16 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.25",
+      "version": "2.0.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.31"
+        "com.unity.test-framework": "1.1.9"
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.ide.windsurf": {
-      "version": "https://github.com/Asuta/com.unity.ide.windsurf.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.9"
-      },
-      "hash": "6161accf3e7beab96341813913e714c7e2fb5c5d"
-    },
     "com.unity.inputsystem": {
-      "version": "1.14.2",
+      "version": "1.13.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -313,7 +304,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.9",
+      "version": "1.8.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -334,7 +325,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.8",
+      "version": "1.9.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {

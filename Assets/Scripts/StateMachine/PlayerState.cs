@@ -36,7 +36,7 @@ public abstract class PlayerState : EntityState
 
     private bool CanDash()
     {
-        if (!skillManager.dash.CanUseSkill())
+        if(skillManager.dash.CanUseSkill() == false)
             return false;
 
         if (player.wallDetected)

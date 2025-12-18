@@ -13,14 +13,11 @@ public class Enemy_BattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        UpdateBattleTimer();
 
-        lastTimeWasInBattle = Time.time;
-
-        if (player == null)
-        {
+        if(player == null)
             player = enemy.GetPlayerReference();
-        }
-        
+
         if (ShouldRetreat())
         {
             rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * -DirectionToPlayer(), enemy.retreatVelocity.y);
@@ -33,14 +30,10 @@ public class Enemy_BattleState : EnemyState
         base.Update();
 
         if (enemy.PlayerDetected())
-        {
             UpdateBattleTimer();
-        }
 
         if (BattleTimeIsOver())
-        {
             stateMachine.ChangeState(enemy.idleState);
-        }
 
         if (WithinAttackRange() && enemy.PlayerDetected())
             stateMachine.ChangeState(enemy.attackState);

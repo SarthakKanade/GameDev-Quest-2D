@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class Enemy : Entity
 {
@@ -17,6 +17,11 @@ public class Enemy : Entity
     public float minRetreatDistance = 1;
     public Vector2 retreatVelocity;
 
+    [Header("Stunned state details")]
+    public float stunnedDuration = 1;
+    public Vector2 stunnedVelocity = new Vector2(7, 7);
+    [SerializeField] protected bool canBeStunned;
+
     [Header("Movement details")]
     public float idleTime = 2;
     public float moveSpeed = 1.4f;
@@ -27,62 +32,65 @@ public class Enemy : Entity
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Transform playerCheck;
     [SerializeField] private float playerCheckDistance = 10;
-    public Transform player;
+    public Transform player { get; private set; }
 
-    [Header("Stunned details")]
-    public float stunDuration = 2;
-    public Vector2 stunnedVelocity = new Vector2(7, 7);
-    protected bool canBeStunned;
-
-    protected override IEnumerator SlowDownCo(float duration, float slowDownMultiplier)
+    protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
     {
         float originalMoveSpeed = moveSpeed;
-        float originalBattleMoveSpeed = battleMoveSpeed;
+        float originalBattleSpeed = battleMoveSpeed;
         float originalAnimSpeed = anim.speed;
 
-        float speedMultiplier = 1 - slowDownMultiplier;
+        float speedMultiplier = 1 - slowMultiplier;
 
-        moveSpeed *= speedMultiplier;
-        battleMoveSpeed *= speedMultiplier;
-        anim.speed *= speedMultiplier;
-
+        moveSpeed = moveSpeed * speedMultiplier;
+        battleMoveSpeed = battleMoveSpeed * speedMultiplier;
+        anim.speed = anim.speed * speedMultiplier;
+        
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originalMoveSpeed;
-        battleMoveSpeed = originalBattleMoveSpeed;
+        battleMoveSpeed = originalBattleSpeed;
         anim.speed = originalAnimSpeed;
     }
 
-    public void EnableCounterWindow(bool enable)
-    {
-        canBeStunned = enable;
-    }
+    public void EnableCounterWindow(bool enable) => canBeStunned = enable;
 
     public override void EntityDeath()
     {
         base.EntityDeath();
-        
+
         stateMachine.ChangeState(deadState);
     }
 
-    private void handlePlayerDeath()
+    private void HandlePlayerDeath()
     {
         stateMachine.ChangeState(idleState);
     }
 
+    public void TryEnterBattleState(Transform player)
+    {
+        if (stateMachine.currentState == battleState)
+            return;
+
+        if (stateMachine.currentState == attackState)
+            return;
+
+        this.player = player;
+        stateMachine.ChangeState(battleState);
+    }
+
     public Transform GetPlayerReference()
     {
-       if (player == null)
-       {
-           player = PlayerDetected().transform;
-       }
-       return player;
+        if (player == null)
+            player = PlayerDetected().transform;
+
+        return player;
     }
 
     public RaycastHit2D PlayerDetected()
     {
         RaycastHit2D hit =
-            Physics2D.Raycast(playerCheck.position, Vector2.right * facingDirection, playerCheckDistance, whatIsPlayer | whatIsGround);
+            Physics2D.Raycast(playerCheck.position, Vector2.right * facingDir, playerCheckDistance, whatIsPlayer | whatIsGround);
 
         if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
             return default;
@@ -90,43 +98,26 @@ public class Enemy : Entity
         return hit;
     }
 
-    public void TryEnterBattleState(Transform player)
-    {
-        if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
-        {
-            return;
-        }
-        
-        this.player = player;
-        stateMachine.ChangeState(battleState);
-    }
-
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDirection * playerCheckDistance), playerCheck.position.y));
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y));
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDirection * attackDistance), playerCheck.position.y));
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y));
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDirection * minRetreatDistance), playerCheck.position.y));
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minRetreatDistance), playerCheck.position.y));
 
     }
 
     private void OnEnable()
     {
-        Player.OnPlayerDeath += handlePlayerDeath;
+        Player.OnPlayerDeath += HandlePlayerDeath;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDeath -= handlePlayerDeath;
+       Player.OnPlayerDeath -= HandlePlayerDeath;  
     }
-
-    private void Die()
-    {
-        EntityDeath();
-    }
-
 }

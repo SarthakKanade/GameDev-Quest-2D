@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player_DashState : PlayerState
 {
     private float originalGravityScale;
-    private int dashDirection;
+    private int dashDir;
 
     public Player_DashState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -14,18 +14,10 @@ public class Player_DashState : PlayerState
         base.Enter();
 
         skillManager.dash.OnStartEffect();
-        player.playerVFX.PlayImageEchoEffect(player.dashDuration);
+        player.vfx.DoImageEchoEffect(player.dashDuration);
 
+        dashDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
         stateTimer = player.dashDuration;
-
-        if (player.moveInput.x != 0)
-        {
-            dashDirection = (int)player.moveInput.x;
-        }
-        else
-        {
-            dashDirection = player.facingDirection;
-        }
 
         originalGravityScale = rb.gravityScale;
         rb.gravityScale = 0;
@@ -36,7 +28,7 @@ public class Player_DashState : PlayerState
     {
         base.Update();
         CancelDashIfNeeded();
-        player.SetVelocity(player.dashSpeed * dashDirection, 0);
+        player.SetVelocity(player.dashSpeed * dashDir, 0);
 
 
         if (stateTimer < 0)
@@ -53,7 +45,7 @@ public class Player_DashState : PlayerState
         base.Exit();
 
         skillManager.dash.OnEndEffect();
-        
+
         player.SetVelocity(0, 0);
         rb.gravityScale = originalGravityScale;
     }

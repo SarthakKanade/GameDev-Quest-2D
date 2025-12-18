@@ -3,25 +3,25 @@ using UnityEngine;
 public class Enemy_AnimationTriggers : Entity_AnimationTriggers
 {
     private Enemy enemy;
-    private Enemy_VFX enemyVFX;
+    private Enemy_VFX enemyVfx;
 
     protected override void Awake()
     {
         base.Awake();
-
         enemy = GetComponentInParent<Enemy>();
-        enemyVFX = GetComponentInParent<Enemy_VFX>();
+        enemyVfx = GetComponentInParent<Enemy_VFX>();
     }
+
 
     private void EnableCounterWindow()
     {
-        enemyVFX.EnableAttackAlert(true);
+        enemyVfx.EnableAttackAlert(true);
         enemy.EnableCounterWindow(true);
     }
 
     private void DisableCounterWindow()
     {
-        enemyVFX.EnableAttackAlert(false);
+        enemyVfx.EnableAttackAlert(false);
         enemy.EnableCounterWindow(false);
     }
 }
