@@ -50,7 +50,7 @@ public class Skill_SwordThrow : Skill_Base
     public override bool CanUseSkill()
     {
         UpdateThrowPower();
-        
+
         if (currentSword != null)
         {
             currentSword.GetSwordBackToPlayer();
@@ -92,7 +92,7 @@ public class Skill_SwordThrow : Skill_Base
         switch (upgradeType)
         {
             case SkillUpgradeType.SwordThrow:
-                currentThrowPower = regularThrowPower;
+                currentThrowPower = throwPower;
                 break;
             case SkillUpgradeType.SwordThrow_Pierce:
                 currentThrowPower = pierceThrowPower;

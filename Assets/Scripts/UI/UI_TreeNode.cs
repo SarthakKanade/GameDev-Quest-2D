@@ -73,12 +73,14 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         foreach (var node in neededNodes)
         {
+            if (node == null) continue;
             if (node.isUnlocked == false)
                 return false;
         }
 
         foreach (var node in conflictNodes)
         {
+            if (node == null) continue;
             if (node.isUnlocked)
                 return false;
         }

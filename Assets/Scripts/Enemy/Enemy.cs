@@ -34,6 +34,9 @@ public class Enemy : Entity
     [SerializeField] private float playerCheckDistance = 10;
     public Transform player { get; private set; }
 
+    public float GetMoveSpeed() => moveSpeed;
+    public float GetBattleMoveSpeed() => battleMoveSpeed;
+
     protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
     {
         float originalMoveSpeed = moveSpeed;

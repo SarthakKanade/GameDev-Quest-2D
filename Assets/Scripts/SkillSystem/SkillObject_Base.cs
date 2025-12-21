@@ -9,14 +9,17 @@ public class SkillObject_Base : MonoBehaviour
     [SerializeField] protected float checkRadius = 1;
 
     protected Animator anim;
+    protected Rigidbody2D rb;
     protected Entity_Stats playerStats;
     protected DamageScaleData damageScaleData;
     protected ElementType usedElement;
+    protected Transform lastTarget;
     protected bool targetGotHit;
 
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -43,7 +46,10 @@ public class SkillObject_Base : MonoBehaviour
                 statusHandler?.ApplyStatusEffect(element, attackData.effectData);
 
             if(targetGotHit)
+            {
+                lastTarget = target.transform;
                 Instantiate(OnHitVFX, target.transform.position, Quaternion.identity);
+            }
 
             usedElement = element;
         }
