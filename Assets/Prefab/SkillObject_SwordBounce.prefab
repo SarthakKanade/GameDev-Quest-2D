@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4726870760886688928
+--- !u!1 &2260664665018570145
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3172633343034006625}
-  - component: {fileID: 6788137624203340174}
-  - component: {fileID: 6207018391712839142}
-  - component: {fileID: 3237416563345655804}
+  - component: {fileID: 4642813229996162854}
+  - component: {fileID: 5811952585901779772}
+  - component: {fileID: 4826923257006109910}
+  - component: {fileID: 6517334431533774363}
   m_Layer: 10
   m_Name: SkillObject_SwordBounce
   m_TagString: Untagged
@@ -19,30 +19,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3172633343034006625
+--- !u!4 &4642813229996162854
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726870760886688928}
+  m_GameObject: {fileID: 2260664665018570145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.88764, y: 2.66065, z: 0}
+  m_LocalPosition: {x: 2.614, y: 2.419, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 94718549104289077}
+  - {fileID: 7162927563449399346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &6788137624203340174
+--- !u!50 &5811952585901779772
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726870760886688928}
+  m_GameObject: {fileID: 2260664665018570145}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -62,13 +62,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &6207018391712839142
+--- !u!58 &4826923257006109910
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726870760886688928}
+  m_GameObject: {fileID: 2260664665018570145}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -98,26 +98,26 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
---- !u!114 &3237416563345655804
+--- !u!114 &6517334431533774363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726870760886688928}
+  m_GameObject: {fileID: 2260664665018570145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f46aeea2a8544d4b83f6ddd881094d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e4158440d1f23145bbab8081857ef3e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillObject_SwordBounce
-  OnHitVFX: {fileID: 6112724607161003390, guid: a092b215b1103c34982cf4ba009e0fed, type: 3}
+  m_EditorClassIdentifier: 
+  onHitVfx: {fileID: 6112724607161003390, guid: a092b215b1103c34982cf4ba009e0fed, type: 3}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 0
-  targetCheck: {fileID: 3172633343034006625}
+    m_Bits: 256
+  targetCheck: {fileID: 4642813229996162854}
   checkRadius: 1
   bounceSpeed: 15
---- !u!1 &8130769552269419309
+--- !u!1 &4525024340107285410
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,9 +125,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 94718549104289077}
-  - component: {fileID: 273063894885550261}
-  - component: {fileID: 7126566974113271363}
+  - component: {fileID: 7162927563449399346}
+  - component: {fileID: 6142361949597781728}
+  - component: {fileID: 1889691271731733422}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -135,28 +135,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &94718549104289077
+--- !u!4 &7162927563449399346
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8130769552269419309}
+  m_GameObject: {fileID: 4525024340107285410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.92387956, w: 0.38268343}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3172633343034006625}
+  m_Father: {fileID: 4642813229996162854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
---- !u!212 &273063894885550261
+--- !u!212 &6142361949597781728
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8130769552269419309}
+  m_GameObject: {fileID: 4525024340107285410}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -170,8 +170,6 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -193,11 +191,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1379488757
   m_SortingLayer: -4
   m_SortingOrder: -1
-  m_Sprite: {fileID: -601463127716254386, guid: e7dd0b7802d214024a7f8146877780dc, type: 3}
+  m_Sprite: {fileID: -1681745248, guid: d8af78c489e3d0541b683c35a86f3b52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -208,14 +205,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7126566974113271363
+--- !u!95 &1889691271731733422
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8130769552269419309}
+  m_GameObject: {fileID: 4525024340107285410}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 45e9878dd5474d64e811576c78ac9312, type: 2}

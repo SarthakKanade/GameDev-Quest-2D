@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5515992307839701071}
   - component: {fileID: 7655859433296511750}
   - component: {fileID: 4196710791272286682}
-  - component: {fileID: 8493011203047586606}
+  - component: {fileID: 5792853688748596933}
   m_Layer: 10
   m_Name: SkillObject_SwordRegular
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2361256126245872939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.51, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -98,7 +98,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
---- !u!114 &8493011203047586606
+--- !u!114 &5792853688748596933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,13 +107,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2361256126245872939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a087bb38d2dc7467697b80e859c80f36, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e893a025e865174b81701d744a492b3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillObject_Sword
-  OnHitVFX: {fileID: 6112724607161003390, guid: a092b215b1103c34982cf4ba009e0fed, type: 3}
+  m_EditorClassIdentifier: 
+  onHitVfx: {fileID: 6112724607161003390, guid: a092b215b1103c34982cf4ba009e0fed, type: 3}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   targetCheck: {fileID: 5515992307839701071}
   checkRadius: 1
 --- !u!1 &2805789487383391281
@@ -168,8 +168,6 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -191,11 +189,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1379488757
   m_SortingLayer: -4
   m_SortingOrder: -1
-  m_Sprite: {fileID: -601463127716254386, guid: e7dd0b7802d214024a7f8146877780dc, type: 3}
+  m_Sprite: {fileID: -1681745248, guid: d8af78c489e3d0541b683c35a86f3b52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

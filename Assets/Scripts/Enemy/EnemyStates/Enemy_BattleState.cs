@@ -21,7 +21,8 @@ public class Enemy_BattleState : EnemyState
 
         if (ShouldRetreat())
         {
-            rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * -DirectionToPlayer(), enemy.retreatVelocity.y);
+            rb.linearVelocity =
+                new Vector2((enemy.retreatVelocity.x * enemy.activeSlowMultiplier) * -DirectionToPlayer(), enemy.retreatVelocity.y);
             enemy.HandleFlip(DirectionToPlayer());
         }
     }

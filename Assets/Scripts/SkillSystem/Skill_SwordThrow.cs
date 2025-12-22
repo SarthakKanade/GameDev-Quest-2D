@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Skill_SwordThrow : Skill_Base
 {
+
     private SkillObject_Sword currentSword;
     private float currentThrowPower;
-    
+
     [Header("Regular Sword Uprgade")]
     [SerializeField] private GameObject swordPrefab;
     [Range(0, 10)]
-    [SerializeField] private float throwPower = 5;
-    [SerializeField] private float throwPowerMultiplier = 10;
+    [SerializeField] private float regularThrowPower = 5;
 
     [Header("Pierce Sword Upgrade")]
     [SerializeField] private GameObject pierceSwordPrefab;
@@ -31,6 +31,7 @@ public class Skill_SwordThrow : Skill_Base
     public float bounceSpeed = 12;
     [Range(0, 10)]
     [SerializeField] private float bounceThrowPower = 5;
+
 
     [Header("Trajectory prediction")]
     [SerializeField] private GameObject predictionDot;
@@ -57,6 +58,7 @@ public class Skill_SwordThrow : Skill_Base
             return false;
         }
 
+
         return base.CanUseSkill();
     }
 
@@ -67,6 +69,8 @@ public class Skill_SwordThrow : Skill_Base
 
         currentSword = newSword.GetComponent<SkillObject_Sword>();
         currentSword.SetupSword(this, GetThrowPower());
+
+        SetSkillOnCooldown();
     }
 
     private GameObject GetSwordPrefab()
@@ -92,7 +96,7 @@ public class Skill_SwordThrow : Skill_Base
         switch (upgradeType)
         {
             case SkillUpgradeType.SwordThrow:
-                currentThrowPower = throwPower;
+                currentThrowPower = regularThrowPower;
                 break;
             case SkillUpgradeType.SwordThrow_Pierce:
                 currentThrowPower = pierceThrowPower;
@@ -107,7 +111,7 @@ public class Skill_SwordThrow : Skill_Base
 
     }
 
-    private Vector2 GetThrowPower() => confirmedDirection * (currentThrowPower * throwPowerMultiplier);
+    private Vector2 GetThrowPower() => confirmedDirection * (currentThrowPower * 10);
 
     public void PredictTrajectory(Vector2 direction)
     {
@@ -119,9 +123,9 @@ public class Skill_SwordThrow : Skill_Base
 
     private Vector2 GetTrajectoryPoint(Vector2 direction, float t)
     {
-        float scaledThrowPower = currentThrowPower * throwPowerMultiplier;
+        float scaledThrowPower = currentThrowPower * 10;
 
-        // This gives us the initial velocity ï¿½ the starting speed and direction of the throw.
+        // This gives us the initial velocity — the starting speed and direction of the throw.
         Vector2 initialVelocity = direction * scaledThrowPower;
 
         // Gravity pulls the sword down over time. The longer it's in the air, the more it drops.
@@ -141,9 +145,7 @@ public class Skill_SwordThrow : Skill_Base
     public void EnableDots(bool enable)
     {
         foreach (Transform t in dots)
-        {
             t.gameObject.SetActive(enable);
-        }
     }
 
     private Transform[] GenerateDots()

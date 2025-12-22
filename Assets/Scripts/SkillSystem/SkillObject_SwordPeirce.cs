@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkillObject_SwordPiercing : SkillObject_Sword
+public class SkillObject_SwordPeirce : SkillObject_Sword
 {
     private int amountToPierce;
 

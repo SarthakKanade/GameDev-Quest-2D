@@ -71,7 +71,7 @@
                 {
                     "name": "RangeAttack",
                     "type": "Button",
-                    "id": "cb2e1cbd-e282-4acd-b534-337e9df23a49",
+                    "id": "34abbe5a-a03d-4d77-b6a4-e6682b9f112a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -80,11 +80,20 @@
                 {
                     "name": "Mouse",
                     "type": "Value",
-                    "id": "f25a4746-191d-474d-ac57-161e78da4aa3",
+                    "id": "5f93a6d0-fc37-46b2-8f37-f7a3488f774f",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "UltimateSpell",
+                    "type": "Button",
+                    "id": "ac1d9ba4-fd23-41f5-99ef-8d5cbd9b1264",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -211,7 +220,7 @@
                 },
                 {
                     "name": "",
-                    "id": "5df58ebb-44cb-4856-8732-753e8c4a73f9",
+                    "id": "68e8a698-6ee7-4f77-a729-4278b96ce0c7",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
@@ -222,12 +231,23 @@
                 },
                 {
                     "name": "",
-                    "id": "56202750-4b60-4fb4-a7ec-ef472b527996",
+                    "id": "c1cb8a42-9f24-4b9b-9fbe-fecd5e91eb5c",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08b76469-23f9-4ccd-b6d5-b95d9f059fa4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "UltimateSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

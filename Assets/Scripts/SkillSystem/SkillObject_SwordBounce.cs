@@ -58,7 +58,7 @@ public class SkillObject_SwordBounce : SkillObject_Sword
     {
         if (enemyTargets == null)
         {
-            enemyTargets = EnemiesAround(transform, 10);
+            enemyTargets = GetEnemiesAround(transform, 10);
             rb.simulated = false;
         }
 
