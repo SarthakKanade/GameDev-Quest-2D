@@ -5,6 +5,14 @@ public class Object_ItemPickup : MonoBehaviour
     private SpriteRenderer sr;
     [SerializeField] private Item_DataSO itemData;
 
+    private Inventory_Item itemToAdd;
+    private Inventory_Base playerInventory;
+
+    private void Awake()
+    {
+        itemToAdd = new Inventory_Item(itemData);
+    }
+
     private void OnValidate()
     {
         if (itemData == null)
@@ -17,8 +25,16 @@ public class Object_ItemPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Pickup" + itemData.itemName);
-        Destroy(gameObject);
+        playerInventory = collision.GetComponentInChildren<Inventory_Base>();
+
+        if (playerInventory == null)
+            return;
+
+        if (playerInventory.CanAddItem())
+        {
+            playerInventory.AddItem(itemToAdd);
+            Destroy(gameObject);
+        }
     }
 
 
