@@ -16,8 +16,6 @@ public class UI_SkillTree : MonoBehaviour
         UpdateAllConnections();
     }
 
-
-
     [ContextMenu("Reset Skill Tree")]
     public void RefundAllSkills()
     {

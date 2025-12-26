@@ -16,7 +16,7 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool isLocked;
 
     [Header("Skil details")]
-    public Skill_DataSO skillData;
+    public SkillDataSO skillData;
     [SerializeField] private string skillName;
     [SerializeField] private Image skillIcon;
     [SerializeField] private int skillCost;
@@ -42,6 +42,9 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Refund()
     {
+        if (isUnlocked == false || skillData.unlockedByDefault)
+            return;
+
         isUnlocked = false;
         isLocked = false;
         UpdateIconColor(GetColorByHex(lockedColorHex));

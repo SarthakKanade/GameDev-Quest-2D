@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : Entity
@@ -13,6 +12,7 @@ public class Player : Entity
     public Player_VFX vfx { get; private set; }
     public Entity_Health health { get; private set; }
     public Entity_StatusHandler statusHandler { get; private set; }
+    public Player_Combat combat { get; private set; }
 
 
     #region State Variables
@@ -56,7 +56,7 @@ public class Player : Entity
     public float dashDuration = .25f;
     public float dashSpeed = 20;
     public Vector2 moveInput { get; private set; }
-    public Vector2 mousePosition { get ; private set; }
+    public Vector2 mousePosition { get; private set; }
 
     protected override void Awake()
     {
@@ -68,6 +68,7 @@ public class Player : Entity
         health = GetComponent<Entity_Health>();
         skillManager = GetComponent<Player_SkillManager>();
         statusHandler = GetComponent<Entity_StatusHandler>();
+        combat = GetComponent<Player_Combat>();
 
         input = new PlayerInputSet();
 
@@ -151,7 +152,6 @@ public class Player : Entity
         yield return new WaitForEndOfFrame();
         stateMachine.ChangeState(basicAttackState);
     }
-
     private void OnEnable()
     {
         input.Enable();
@@ -161,12 +161,11 @@ public class Player : Entity
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
 
-        input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
-
         input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
         input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
-        
 
+        input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
+        input.Player.ToggleInventoryUI.performed += ctx => ui.ToggleInventoryUI();
     }
 
     private void OnDisable()

@@ -720,6 +720,7 @@ GameObject:
   - component: {fileID: 175430866473161657}
   - component: {fileID: 4284223986879445403}
   - component: {fileID: 1491986315721214162}
+  - component: {fileID: 8339757543674283343}
   m_Layer: 8
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -861,16 +862,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38672b712a0f974d914ba1350150b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicAttackScale:
+    phyiscal: 1
+    elemental: 1
+    chillDuration: 3
+    chillSlowMulitplier: 0.2
+    burnDuratin: 3
+    burnDamageScale: 1
+    shockDuration: 3
+    shockDamageScale: 1
+    shockCharge: 0.4
   targetCheck: {fileID: 4484963058172476661}
   targetCheckRadius: 1
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  defaultDuration: 3
-  chillSlowMultiplier: 0.4
-  electrifyChargeBuildUp: 0.4
-  fireScale: 0.8
-  lightningScale: 2.5
 --- !u!114 &5390801592584335963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,7 +890,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  isDead: 0
   regenInterval: 1
   canRegenerateHealth: 1
   knockbackPower: {x: 1.5, y: 2.5}
@@ -911,7 +916,7 @@ MonoBehaviour:
   critHitVfx: {fileID: 1098636999657065682, guid: 003eae1b2e4e74c46910443c3f2c95a9, type: 3}
   chillVfx: {r: 0.42352942, g: 0.69803923, b: 1, a: 1}
   burnVfx: {r: 0.98039216, g: 0.27058825, b: 0.14509805, a: 1}
-  electrifyVfx: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  shockVfx: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   attackAlert: {fileID: 7218110259001566426}
 --- !u!114 &4284223986879445403
 MonoBehaviour:
@@ -928,7 +933,7 @@ MonoBehaviour:
   defaultStatSetup: {fileID: 11400000, guid: 5e11709fdb4158448aabbb7715ca501f, type: 2}
   resources:
     maxHealth:
-      baseValue: 100
+      baseValue: 1500
       modifiers: []
     healthRegen:
       baseValue: 0
@@ -938,7 +943,7 @@ MonoBehaviour:
       baseValue: 1
       modifiers: []
     damage:
-      baseValue: 10
+      baseValue: 40
       modifiers: []
     critPower:
       baseValue: 150
@@ -1002,6 +1007,22 @@ MonoBehaviour:
   lighingStrikeVfx: {fileID: 609128798462994316, guid: 7892dafb312e9ef46bc51c6c233e5927, type: 3}
   currentCharge: 0
   maximumCharge: 1
+--- !u!114 &8339757543674283343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409625887082432548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e7afcb4ede1d2459e3c47fb1c8fba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefab: {fileID: 2736169520582809571, guid: 3db9e2cc8d65a6a4a867ca2a5440825e, type: 3}
+  dropData: {fileID: 11400000, guid: 53202fea4f3bc0a40829e9c2d34d4477, type: 2}
+  maxRarityAmount: 1200
+  maxItemsToDrop: 3
 --- !u!1 &6765360969479623504
 GameObject:
   m_ObjectHideFlags: 0

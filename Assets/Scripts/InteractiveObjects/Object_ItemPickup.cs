@@ -3,10 +3,12 @@ using UnityEngine;
 public class Object_ItemPickup : MonoBehaviour
 {
     private SpriteRenderer sr;
-    [SerializeField] private Item_DataSO itemData;
+
+    [SerializeField] private ItemDataSO itemData;
 
     private Inventory_Item itemToAdd;
-    private Inventory_Base playerInventory;
+    private Inventory_Base inventory;
+
 
     private void Awake()
     {
@@ -23,20 +25,20 @@ public class Object_ItemPickup : MonoBehaviour
         gameObject.name = "Object_ItemPickup - " + itemData.itemName;
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerInventory = collision.GetComponentInChildren<Inventory_Base>();
+        inventory = collision.GetComponent<Inventory_Base>();
 
-        if (playerInventory == null)
+        if (inventory == null)
             return;
 
-        if (playerInventory.CanAddItem())
+        bool canAddItem = inventory.CanAddItem() || inventory.FindStackable(itemToAdd) != null;
+
+        if (canAddItem)
         {
-            playerInventory.AddItem(itemToAdd);
+            inventory.AddItem(itemToAdd);
             Destroy(gameObject);
         }
     }
-
-
-
 }
