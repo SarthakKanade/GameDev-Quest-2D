@@ -209,11 +209,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Shine_0: 2813274282232148420
-      Shine_1: 6200903827435258917
-      Shine_2: -186149506832650953
-      Shine_3: 1499850840168733054
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
