@@ -74,6 +74,7 @@ public class Skill_TimeEcho : Skill_Base
             return;
 
         CreateTimeEcho();
+        SetSkillOnCooldown();
     }
 
 
