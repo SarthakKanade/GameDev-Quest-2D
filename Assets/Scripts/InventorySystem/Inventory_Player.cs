@@ -5,13 +5,15 @@ using UnityEngine;
 public class Inventory_Player : Inventory_Base
 {
     public event Action<int> OnQuickSlotUsed;
-    public int gold = 10000;
 
+    public Inventory_Storage storage { get; private set; }
     public List<Inventory_EquipmentSlot> equipList;
-    public Inventory_Storage storage { get ; private set; }
 
     [Header("Quick Item Slots")]
     public Inventory_Item[] quickItems = new Inventory_Item[2];
+
+    [Header("Gold Info")]
+    public int gold = 10000;
 
     protected override void Awake()
     {
@@ -63,7 +65,7 @@ public class Inventory_Player : Inventory_Base
         var slotToReplace = matchingSlots[0];
         var itemToUneqip = slotToReplace.equipedItem;
 
-        UnequipItem(itemToUneqip,slotToReplace != null);
+        UnequipItem(itemToUneqip, slotToReplace != null);
         EquipItem(inventoryItem, slotToReplace);
     }
 
@@ -78,10 +80,9 @@ public class Inventory_Player : Inventory_Base
         player.health.SetHealthToPercent(savaedHealthPercent);
         RemoveOneItem(itemToEquip);
     }
-
-    public void UnequipItem(Inventory_Item itemToUnequip,bool replacingItem = false)
+    public void UnequipItem(Inventory_Item itemToUnequip, bool replacingItem = false)
     {
-        if (CanAddItem(itemToUnequip) == false && replacingItem  == false)
+        if (CanAddItem(itemToUnequip) == false && replacingItem == false)
         {
             Debug.Log("No space!");
             return;
@@ -90,7 +91,7 @@ public class Inventory_Player : Inventory_Base
         float savedHealthPercent = player.health.GetHealthPercent();
         var slotToUnequip = equipList.Find(slot => slot.equipedItem == itemToUnequip);
 
-        if(slotToUnequip != null)
+        if (slotToUnequip != null)
             slotToUnequip.equipedItem = null;
 
         itemToUnequip.RemoveModifiers(player.stats);
@@ -98,5 +99,75 @@ public class Inventory_Player : Inventory_Base
 
         player.health.SetHealthToPercent(savedHealthPercent);
         AddItem(itemToUnequip);
+    }
+
+    public override void SaveData(ref GameData data)
+    {
+        data.gold = gold;
+        data.inventory.Clear();
+        data.equipedItems.Clear();
+
+        foreach (var item in itemList)
+        {
+            if (item != null && item.itemData != null)
+            {
+                string saveId = item.itemData.saveId;
+
+
+                if (data.inventory.ContainsKey(saveId) == false)
+                    data.inventory[saveId] = 0;
+
+                data.inventory[saveId] += item.stackSize;
+            }
+        }
+
+        foreach (var slot in equipList)
+        {
+            if (slot.HasItem())
+                data.equipedItems[slot.equipedItem.itemData.saveId] = slot.slotType;
+        }
+    }
+
+    public override void LoadData(GameData data)
+    {
+        gold = data.gold;
+
+        foreach (var entry in data.inventory)
+        {
+            string saveId = entry.Key;
+            int stackSize = entry.Value;
+
+            ItemDataSO itemData = itemDataBase.GetItemData(saveId);
+
+            if (itemData == null)
+            {
+                Debug.LogWarning("Item not found: " + saveId);
+                continue;
+            }
+
+
+            for (int i = 0; i < stackSize; i++)
+            {
+                Inventory_Item itemToLoad = new Inventory_Item(itemData);
+                AddItem(itemToLoad);
+            }
+        }
+
+        foreach (var entry in data.equipedItems)
+        {
+            string saveId = entry.Key;
+            ItemType loadedSlotType = entry.Value;
+
+            ItemDataSO itemData = itemDataBase.GetItemData(saveId);
+            Inventory_Item itemToLoad = new Inventory_Item(itemData);
+
+            var slot = equipList.Find(slot => slot.slotType == loadedSlotType && slot.HasItem() == false);
+
+            slot.equipedItem = itemToLoad;
+            slot.equipedItem.AddModifiers(player.stats);
+            slot.equipedItem.AddItemEffect(player);
+        }
+
+        TriggerUpdateUI();
     }
 }
