@@ -212,11 +212,10 @@ public class Inventory_Storage : Inventory_Base
                 continue;
             }
 
-
+            Inventory_Item itemToLoad = new Inventory_Item(itemData);
 
             for (int i = 0; i < stackSize; i++)
             {
-                Inventory_Item itemToLoad = new Inventory_Item(itemData);
                 AddItem(itemToLoad);
             }
         }
@@ -234,12 +233,13 @@ public class Inventory_Storage : Inventory_Base
                 continue;
             }
 
+            Inventory_Item itemToLoad = new Inventory_Item(itemData);
 
             for (int i = 0; i < stackSize; i++)
             {
-                Inventory_Item itemToLoad = new Inventory_Item(itemData);
                 AddMaterialToStash(itemToLoad);
             }
+
         }
     }
 }

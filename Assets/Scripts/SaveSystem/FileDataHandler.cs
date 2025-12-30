@@ -8,7 +8,7 @@ public class FileDataHandler
 {
     private string fullPath;
     private bool encrpyData;
-    private string codeWord = "GameDevQuest2D";
+    private string codeWord = "GameDev-Quest-2D";
 
     public FileDataHandler(string dataDirPath, string dataFileName,bool encryptData)
     {
