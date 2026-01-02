@@ -902,6 +902,71 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1001 &572604513
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3468218557498022801, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 1008008770359608940, guid: 3737359de1c77be4ba6146b22607c881, type: 2}
+    - target: {fileID: 4114007981348317906, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_Name
+      value: ___ AUDIO MANAGER ___
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6527338104142793159, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195971852875725998, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3831803671307142620, guid: 3737359de1c77be4ba6146b22607c881, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fbc5bc63710411a4892bbd4bfc41eb5e, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2942,8 +3007,8 @@ RectTransform:
   - {fileID: 3074766893384274566}
   m_Father: {fileID: 4155375589814540306}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.596, y: 0}
-  m_AnchorMax: {x: 0.596, y: 1}
+  m_AnchorMin: {x: 0.5995996, y: 0}
+  m_AnchorMax: {x: 0.5995996, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3281,7 +3346,7 @@ GameObject:
   - component: {fileID: 283560412882044022}
   - component: {fileID: 7849433919713661356}
   m_Layer: 5
-  m_Name: BGM_Volume
+  m_Name: BGM_Volume - Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3465,7 +3530,7 @@ GameObject:
   - component: {fileID: 1168651364012735296}
   - component: {fileID: 8573087556853179096}
   m_Layer: 5
-  m_Name: SFX_Volume
+  m_Name: SFX_Volume - Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3542,8 +3607,8 @@ RectTransform:
   - {fileID: 1750568926803411698}
   m_Father: {fileID: 9147081641433485125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.596, y: 0}
-  m_AnchorMax: {x: 0.596, y: 1}
+  m_AnchorMin: {x: 0.5995996, y: 0}
+  m_AnchorMax: {x: 0.5995996, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3898,6 +3963,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarToggle: {fileID: 7365828885196273887}
+  audioMixer: {fileID: 24100000, guid: 3737359de1c77be4ba6146b22607c881, type: 2}
+  mixerMultiplier: 25
+  bgmSlider: {fileID: 7849433919713661356}
+  bgmParametr: bgmMixer
+  sfxSlider: {fileID: 8573087556853179096}
+  sfxParametr: sfxMixer
 --- !u!224 &6988542828348233349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4093,7 +4164,7 @@ RectTransform:
   m_Father: {fileID: 607254662232400320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.596, y: 1}
+  m_AnchorMax: {x: 0.5995996, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4312,13 +4383,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 8170730223802215334}
   m_HandleRect: {fileID: 5158588795309127662}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.596
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6647813711805723108}
+        m_TargetAssemblyTypeName: UI_Options, Assembly-CSharp
+        m_MethodName: BGMSliderValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7858517894939049830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4414,7 +4497,7 @@ RectTransform:
   m_Father: {fileID: 3083878963447368346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.596, y: 1}
+  m_AnchorMax: {x: 0.5995996, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4522,13 +4605,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 7399655930840026041}
   m_HandleRect: {fileID: 2251205208052776283}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.596
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6647813711805723108}
+        m_TargetAssemblyTypeName: UI_Options, Assembly-CSharp
+        m_MethodName: SFXSliderValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &8725180294516648922
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4707,3 +4802,4 @@ SceneRoots:
   - {fileID: 483261857}
   - {fileID: 802100064}
   - {fileID: 148519956}
+  - {fileID: 572604513}

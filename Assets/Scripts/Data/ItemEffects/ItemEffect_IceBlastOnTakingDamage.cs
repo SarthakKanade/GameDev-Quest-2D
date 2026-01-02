@@ -62,4 +62,10 @@ public class ItemEffect_IceBlastOnTakingDamage : ItemEffect_DataSO
         player.health.OnTakingDamage -= ExecuteEffect;
         player = null;
     }
+
+    private void OnEnable()
+    {
+        lastTimeUsed = -999;
+    }
+
 }
