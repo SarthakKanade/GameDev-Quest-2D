@@ -28,7 +28,7 @@ public class Entity_Combat : MonoBehaviour
     {
         bool targetGotHit = false;
 
-        foreach (var target in GetDetectedColliders())
+        foreach (var target in GetDetectedColliders(whatIsTarget))
         {
             IDamageable damageable = target.GetComponent<IDamageable>();
 
@@ -60,9 +60,45 @@ public class Entity_Combat : MonoBehaviour
             sfx?.PlayAttackMiss();
     }
 
-    protected Collider2D[] GetDetectedColliders()
+    public void PerformAttackOnTarget(Transform target,DamageScaleData damageScaleData = null)
     {
-        return Physics2D.OverlapCircleAll(targetCheck.position,targetCheckRadius, whatIsTarget);
+        bool targetGotHit = false;
+
+
+        IDamageable damageable = target.GetComponent<IDamageable>();
+
+        if (damageable == null)
+            return; // skip target, go to next target
+
+        DamageScaleData damageScale = damageScaleData == null ? basicAttackScale : damageScaleData;
+        AttackData attackData = stats.GetAttackData(basicAttackScale);
+        Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
+
+
+        float physicalDamage = attackData.phyiscalDamage;
+        float elementalDamage = attackData.elementalDamage;
+        ElementType element = attackData.element;
+
+        targetGotHit = damageable.TakeDamage(physicalDamage, elementalDamage, element, transform);
+
+        if (element != ElementType.None)
+            statusHandler?.ApplyStatusEffect(element, attackData.effectData);
+
+        if (targetGotHit)
+        {
+            OnDoingPhysicalDamage?.Invoke(physicalDamage);
+            vfx.CreateOnHitVFX(target.transform, attackData.isCrit, element);
+            sfx?.PlayAttackHit();
+        }
+
+
+        if (targetGotHit == false)
+            sfx?.PlayAttackMiss();
+    }
+
+    protected Collider2D[] GetDetectedColliders(LayerMask whatToDetect)
+    {
+        return Physics2D.OverlapCircleAll(targetCheck.position, targetCheckRadius, whatToDetect);
     }
 
     private void OnDrawGizmos()
